@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: swagger-ui-nginx-ingress
+  labels:
+  {{- range $key, $value := .Values.labels }}
+    {{ $key }}: {{ $value }}
+  {{- end }}
+  annotations:
+  {{- range $key, $value := .Values.ingress.annotations }}
+    {{ $key }}: {{ $value | quote }}
+  {{- end }}
+spec:
+  tls:
+{{ toYaml .Values.ingress.tls | indent 4 }}
+  rules:
+  {{- range .Values.ingress.hosts }}
+    - host: {{ . }}
+      http:
+        paths:
+        - path: /
+          backend:
+            serviceName: swagger-ui
+            servicePort: 8080
+  {{- end }}

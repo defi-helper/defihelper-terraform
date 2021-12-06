@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: swagger-ui
+  labels:
+  {{- range $key, $value := .Values.labels }}
+    {{ $key }}: {{ $value }}
+  {{- end }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+    {{- range $key, $value := .Values.labels }}
+      {{ $key }}: {{ $value }}
+    {{- end }}
+  template:
+    metadata:
+      labels:
+      {{- range $key, $value := .Values.labels }}
+        {{ $key }}: {{ $value }}
+      {{- end }}
+    spec:
+      containers:
+      - name: swagger-ui
+        env:
+        - name: URLS
+          value: "[{ url:\"https://gw.1iu.ru/swagger.json\", name:\"Gateway\"}, { url:\"https://gw.iu1.ru/swagger.json\", name:\"Gateway DEV\"}, { url:\"https://my.smartwebinar.org/swagger.json\", name:\"SmartWebinar\"},{ url:\"https://chat.1iu.ru/swagger.json\", name:\"Chat service\"},{ url:\"https://auth.dev01.1iu.ru/swagger.json\", name:\"Auth service DEV\"}]"
+        image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
+        imagePullPolicy: Always
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          timeoutSeconds: 20
+          successThreshold: 1
+          failureThreshold: 5
+        ports:
+        - containerPort: 8080
+          name: 8080tcp01
+          protocol: TCP
+      restartPolicy: Always

@@ -1,0 +1,8 @@
+.idea/
+.terraform/
+terraform.d/
+*.tfstate*
+output/
+secrets/
+.terraform.lock.hcl
+*.tfvars*

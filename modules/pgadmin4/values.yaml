@@ -1,0 +1,22 @@
+serverDefinitions:
+  enabled: true
+  servers: |-
+    "1": {
+      "Name": "postgres",
+      "Group": "Servers",
+      "Port": 5432,
+      "Username": "development",
+      "Host": "postgres",
+      "SSLMode": "prefer",
+      "MaintenanceDB": "postgres"
+    }  
+strategy:
+  type: Recreate
+livenessProbe:
+  initialDelaySeconds: 60
+  periodSeconds: 60
+  timeoutSeconds: 15
+  successThreshold: 1
+  failureThreshold: 3
+nodeSelector:
+  group_name: "service"  

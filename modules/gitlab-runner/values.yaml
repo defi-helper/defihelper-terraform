@@ -1,0 +1,32 @@
+runners:
+    runUntagged: false
+    privileged: true
+    config: |
+      [[runners]]
+        [runners.kubernetes]
+          cpu_limit = "3"
+          cpu_request = "200m"
+          cpu_request_overwrite_max_allowed = "3000m"
+          cpu_limit_overwrite_max_allowed = "4000m"
+          memory_limit = "4096M"
+          memory_request = "4096M"
+          memory_request_overwrite_max_allowed = "8192M"
+          memory_limit_overwrite_max_allowed = "10240M"
+    nodeSelector:
+      group_name: "service"
+
+nodeSelector:
+  group_name: "service"
+
+metrics:
+    enabled: true
+
+rbac:
+    create: true
+    ## Define specific rbac permissions.
+    resources: ["pods", "pods/exec", "secrets", "configmaps", "pods/attach"]
+    verbs: ["get", "list", "watch", "create", "patch", "delete", "update"]
+
+    ## Run the gitlab-bastion container with the ability to deploy/manage containers of jobs
+    ## cluster-wide or only within namespace
+    clusterWideAccess: false

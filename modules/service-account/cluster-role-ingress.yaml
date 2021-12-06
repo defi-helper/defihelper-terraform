@@ -1,0 +1,9 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: 1iu-ingress-role
+rules:
+- apiGroups: ["", "extensions", "apps", "batch"]
+  resources: ["ingress"]
+  verbs: ["create", "get", "list", "watch", "logs", "describe", "patch", "delete"]

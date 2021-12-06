@@ -1,0 +1,15 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: 1iu-ingress-binding-at
+  namespace: at
+roleRef:
+  kind: ClusterRole
+  apiGroup: ""
+  name: 1iu-ingress-role
+subjects:
+- kind: ServiceAccount
+  name: default
+  namespace: at
+  apiGroup: ""

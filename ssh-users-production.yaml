@@ -1,0 +1,13 @@
+#cloud-config.yaml
+ssh_pwauth: no
+users:
+  - name: vgolovnin
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDrs2fLjTqFWztWU4lDW7Jx/8rZq2v7+z+/kXmb9j6Aixc+FKKB2ub8wlHMJmJrnjDFyefop5zTX5DjCnaJGoHZm8Bvx3fgAFRRfqmVKGGHjgnPn6gRDVl9eYXcb31MqM9FML/m80M8qlC3PgdKvT1HNR3LRAdXrGItCIlBjpN5XMINtB4FtWMWo/dih8uo1LDtsD9h87WTIcEQONoAmL9ksEaMjNtK2krwuQU6yntbRyJe3WWWtHYZgRZ0WqZh/veNl+cVsrKPKrqkRDFnz3imUuQMgC9jBUAF3IaQ3CejuWGsxbW6I/hc5m5BK5Bb83/MSzw8LQkqL0FZhMfhj/eP vgolovnin@ubuntu"
+  - name: mastyf
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC/z/b1IcwZu3ERCw5Xg99u0VbNR5ZlR4htZ88ANfq2VOjoXffo3290lTNuALGWzYV6A/l7ZW7K/93pmCcZL905T/So6YQlxhMcPmksQUMS7KGCSXrofEmm2+aPA3xnhXiSqrVCwCc0wPdfGlnNeaV4b2gYkyGIwSWv0It6YfJqooulwddHUU3Ux2NnoD3A1D9xpykfkiK/JsR4UzjhWNoswntHlwpuqccdBSMMzSick/AHbzy6rWfFsNNbtnRYtiXMuGbfMRyjZCm50sOUNxHpNRlSzb+xf/oMtqRR7BZ6mbEQAc7PVxPzgkBti4jUqb5YvZ3eNe8uIgkb2T9MBb9r vk@vkmac.local"
