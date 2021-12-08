@@ -61,10 +61,6 @@ locals {
       name   = "sentry"
       issuer = module.cert-manager.cluster_issuers["production"]
     }
-    centrifugo = {
-      name   = var.centrifugo_host
-      issuer = module.cert-manager.cluster_issuers["production"]
-    }
   }
   ingress = {
     for key, host in local.hosts :
@@ -193,6 +189,7 @@ provider "local" {}
 
 provider "random" {}
 
+/*
 module "nfs-server-provisioner" {
   source = "./modules/nfs-server-provisioner"
 
@@ -200,6 +197,7 @@ module "nfs-server-provisioner" {
   storage_class = "yc-network-ssd-nonreplicated"
   storage_size  = var.nfs_disk_size
 }
+*/
 
 module "registry" {
   source = "./modules/registry"
@@ -254,9 +252,6 @@ module "prometheus" {
   alertmanager_email_to       = var.alertmanager_email_to
   alertmanager_smtp_address    = var.alertmanager_smtp_address
   alertmanager_smtp_password  = var.alertmanager_smtp_password
-  grafana_gitlab_application_id    = var.grafana_gitlab_application_id
-  grafana_gitlab_secret  = var.grafana_gitlab_secret
-  telegram_bot_admins = var.telegram_bot_admins
   telegram_token = var.telegram_token
   telegram_chat_id = var.telegram_chat_id
 }
@@ -298,38 +293,18 @@ module "postgres" {
   pg_admin_name          = var.pg_admin_name
   pg_admin_password      = var.pg_admin_password
   pg_admin_conn_limit    = var.pg_admin_conn_limit
-  pg_git_name            = var.pg_git_name
-  pg_git_password        = var.pg_git_password
-  pg_git_conn_limit      = var.pg_git_conn_limit
-  pg_fs_user_name        = var.pg_fs_user_name
-  pg_fs_user_password    = var.pg_fs_user_password
-  pg_fs_user_conn_limit  = var.pg_fs_user_conn_limit
+  pg_defihelper_user_name            = var.pg_defihelper_user_name
+  pg_defihelper_user_password        = var.pg_defihelper_user_password
+  pg_defihelper_user_conn_limit      = var.pg_defihelper_user_conn_limit
+  pg_scanner_user_name        = var.pg_scanner_user_name
+  pg_scanner_user_password    = var.pg_scanner_user_password
+  pg_scanner_user_conn_limit  = var.pg_scanner_user_conn_limit
   enable_replication     = var.enable_replication
   location_subnets       = module.vpc.location_subnets
   pg_public_ip           = var.pg_public_ip
-  pg_web_user_name       = var.pg_web_user_name
-  pg_web_user_password   = var.pg_web_user_password
-  pg_web_user_conn_limit = var.pg_web_user_conn_limit
-  pg_auth_user_name       = var.pg_auth_user_name
-  pg_auth_user_password   = var.pg_auth_user_password
-  pg_auth_user_conn_limit = var.pg_auth_user_conn_limit
-  pg_chat_user_name       = var.pg_chat_user_name
-  pg_chat_user_password   = var.pg_chat_user_password
-  pg_chat_user_conn_limit = var.pg_chat_user_conn_limit
-  pg_telegram_user_name   = var.pg_telegram_user_name
-  pg_telegram_user_password = var.pg_telegram_user_password
-  pg_telegram_user_conn_limit = var.pg_telegram_user_conn_limit
-  pg_sentry_user_name       = var.pg_sentry_user_name
-  pg_sentry_user_password   = var.pg_sentry_user_password
-  pg_sentry_user_conn_limit = var.pg_sentry_user_conn_limit
-  pg_gateway_user_name       = var.pg_gateway_user_name
-  pg_gateway_user_password   = var.pg_gateway_user_password
-  pg_gateway_user_conn_limit = var.pg_gateway_user_conn_limit
-  pg_billing_user_name   = var.pg_billing_user_name
-  pg_billing_user_password = var.pg_billing_user_password
-  pg_billing_user_conn_limit = var.pg_billing_user_conn_limit
 }
 
+/*
 module "mysql" {
   source                   = "./modules/mysql"
   name                     = "${var.cluster_name}-mysql"
@@ -357,6 +332,7 @@ module "dns" {
   dns_zones                = var.dns_zones
   dns_zones_rs             = var.dns_zones_rs
 }
+*/
 
 # resource "yandex_iam_service_account" "gitlabstorage" {
 #   folder_id   = var.yandex_folder_id
@@ -383,7 +359,7 @@ module "dns" {
 #   access_key = yandex_iam_service_account_static_access_key.gitlabstorage-static-key.access_key
 #   secret_key = yandex_iam_service_account_static_access_key.gitlabstorage-static-key.secret_key
 # }
-
+/*
 module "gitlab" {
   enable_gitlab                  = var.enable_gitlab
   source                         = "./modules/gitlab"
@@ -421,7 +397,8 @@ module "gitlab-runner" {
   gitlab_runner_docker_io_auth  = var.gitlab_runner_docker_io_auth
   gitlab_runner_tags            = var.gitlab_runner_tags
 }
-
+*/
+/*
 module "rabbitmq" {
   source                = "./modules/rabbit"
   rabbitmq_host         = var.rabbitmq_host
@@ -431,9 +408,9 @@ module "rabbitmq" {
   rabbitmq_replicaCount = var.rabbitmq_replicaCount
   dep            = [
     module.cert-manager.cluster_issuers["production"],
-    module.istio
   ]
 }
+*/
 
 module "loki-stack" {
   source                = "./modules/loki-stack"
@@ -445,7 +422,7 @@ module "loki-stack" {
   ]
 }
 
-
+/*
 module "swagger" {
   source         = "./modules/swagger"
   ssl_1iu_ru_crt = var.ssl_1iu_ru_crt
@@ -453,10 +430,10 @@ module "swagger" {
   cluster_domain = var.cluster_domain
   dep            = [
     module.cert-manager.cluster_issuers["production"],
-    module.istio,
     module.nginx-ingress,
   ]
 }
+*/
 
 module "pgadmin4" {
   source                  = "./modules/pgadmin4"
@@ -465,15 +442,13 @@ module "pgadmin4" {
   pgadmin4_admin_password = var.pgadmin4_admin_password
   pgadmin4_admin_email    = var.pgadmin4_admin_email
   pgadmin4_domain         = var.pgadmin4_domain
-  ssl_1iu_ru_crt          = var.ssl_1iu_ru_crt
-  ssl_1iu_ru_key          = var.ssl_1iu_ru_key
   dep            = [
     module.cert-manager.cluster_issuers["production"],
-    module.istio,
     module.nginx-ingress,
   ]
 }
 
+/*
 module "phpmyadmin" {
   source         = "./modules/phpmyadmin"
   node_selector  = local.node_selectors["service"]
@@ -482,7 +457,6 @@ module "phpmyadmin" {
   ssl_1iu_ru_key = var.ssl_1iu_ru_key
   dep            = [
     module.cert-manager.cluster_issuers["production"],
-    module.istio,
     module.nginx-ingress,
   ]
 }
@@ -503,6 +477,7 @@ module "istio" {
     }
   }
 }
+*/
 
 module "s3" {
   source           = "./modules/s3"
@@ -512,6 +487,7 @@ module "s3" {
   s3_service_account_loki = var.s3_service_account_loki
 }
 
+/*
 module "sentry" {
   source           = "./modules/sentry"
   node_selector    = local.node_selectors["service"]
@@ -564,3 +540,4 @@ module "centrifugo" {
 module "service-account" {
   source = "./modules/service-account"
 }
+*/

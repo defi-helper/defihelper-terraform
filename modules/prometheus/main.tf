@@ -216,17 +216,6 @@ locals {
         grafana_net = {
           url = "https://grafana.net"
         }
-        "auth.gitlab" = {
-          enabled = true
-          allow_sign_up = true
-          client_id = var.grafana_gitlab_application_id
-          client_secret = var.grafana_gitlab_secret
-          scopes = "read_api"
-          auth_url = "https://gitlab.1iu.ru/oauth/authorize"
-          token_url = "https://gitlab.1iu.ru/oauth/token"
-          api_url = "https://gitlab.1iu.ru/api/v4"
-          allowed_groups = ""
-        }
       }
       persistence = {
         enabled = true
@@ -502,25 +491,6 @@ locals {
       ]
     }
   }
-  alertmanagerBot = {
-    env = {
-      "ALERTMANAGER_URL" = "http://kube-prometheus-stack-alertmanager:9093"
-      "TELEGRAM_ADMIN" = var.telegram_bot_admins
-      "TELEGRAM_TOKEN" = var.telegram_token
-    }
-    service = {
-      main = {
-        enabled = true
-        primary = true
-        ports = {
-          http = {
-            port = 8080
-            targetPort = 8080
-          }
-        }
-      }
-    }
-  }
   alertmanagerNotifier = {
     env = {
       "TELEGRAM_TOKEN" = var.telegram_token
@@ -550,17 +520,6 @@ resource "helm_release" "prometheus-adapter" {
   atomic      = true
   depends_on = [helm_release.kube-prometheus-stack]
 }
-
-/*
-resource "helm_release" "alertmanager-bot" {
-  name        = "alertmanager-bot"
-  chart       = "${path.root}/modules/prometheus/helm/alertmanager-bot"
-  namespace   = kubernetes_namespace.prometheus.metadata[0].name
-  values      = [yamlencode(local.alertmanagerBot)]
-  atomic      = true
-  depends_on = [helm_release.kube-prometheus-stack]
-}
-*/
 
 resource "helm_release" "alertmanager-notifier" {
   name        = "alertmanager-notifier"

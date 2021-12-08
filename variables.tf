@@ -100,10 +100,12 @@ variable "output_dir" {
   type    = string
   default = "output"
 }
+
+/*
 variable "kubeconfig_path" {
   type = string
 }
-
+*/
 ###################################### Bastion ######################################
 
 variable "bastion_allow_stopping_for_update" {
@@ -168,33 +170,9 @@ variable "pg_admin_conn_limit" {
   description = ""
   default     = ""
 }
-variable "pg_git_name" {
-  description = ""
-  default     = ""
-}
-variable "pg_git_password" {
-  description = ""
-  default     = ""
-}
-variable "pg_git_conn_limit" {
-  description = ""
-  default     = ""
-}
-variable "pg_fs_user_name" {
-  description = ""
-  default     = ""
-}
-variable "pg_fs_user_password" {
-  description = ""
-  default     = ""
-}
 variable "pg_public_ip" {
   description = ""
   default     = false
-}
-variable "pg_fs_user_conn_limit" {
-  description = ""
-  default     = ""
 }
 variable "enable_replication" {
   description = ""
@@ -204,6 +182,7 @@ variable "location_subnets" {
   description = ""
   default     = ""
 }
+/*
 variable "mysql_tier_id" {
   description = ""
   default     = ""
@@ -252,91 +231,33 @@ variable "mysql_oplatakursov_conn_limit" {
   description = ""
   default     = ""
 }
-variable "pg_web_user_name" {
+*/
+variable "pg_defihelper_user_name" {
   description = ""
   default     = ""
 }
-variable "pg_web_user_password" {
+variable "pg_defihelper_user_password" {
   description = ""
   default     = ""
 }
-variable "pg_web_user_conn_limit" {
+variable "pg_defihelper_user_conn_limit" {
   description = ""
   default     = ""
 }
-variable "pg_auth_user_name" {
+variable "pg_scanner_user_name" {
   description = ""
   default     = ""
 }
-variable "pg_auth_user_password" {
+variable "pg_scanner_user_password" {
   description = ""
   default     = ""
 }
-variable "pg_auth_user_conn_limit" {
-  description = ""
-  default     = ""
-}
-variable "pg_chat_user_name" {
-  description = ""
-  default     = ""
-}
-variable "pg_chat_user_password" {
-  description = ""
-  default     = ""
-}
-variable "pg_chat_user_conn_limit" {
-  description = ""
-  default     = ""
-}
-variable "pg_telegram_user_name" {
-  description = ""
-  default     = ""
-}
-variable "pg_telegram_user_password" {
-  description = ""
-  default     = ""
-}
-variable "pg_telegram_user_conn_limit" {
-  description = ""
-  default     = ""
-}
-variable "pg_sentry_user_name" {
-  description = ""
-  default     = ""
-}
-variable "pg_sentry_user_password" {
-  description = ""
-  default     = ""
-}
-variable "pg_sentry_user_conn_limit" {
-  description = ""
-  default     = ""
-}
-variable "pg_gateway_user_name" {
-  description = ""
-  default     = ""
-}
-variable "pg_gateway_user_password" {
-  description = ""
-  default     = ""
-}
-variable "pg_gateway_user_conn_limit" {
-  description = ""
-  default     = ""
-}
-variable "pg_billing_user_name" {
-  description = ""
-  default     = ""
-}
-variable "pg_billing_user_password" {
-  description = ""
-  default     = ""
-}
-variable "pg_billing_user_conn_limit" {
+variable "pg_scanner_user_conn_limit" {
   description = ""
   default     = ""
 }
 ###################################### Managed Database End ######################################
+/*
 ###################################### Gitlab ######################################
 variable "gitlab_certificate_secret_name" {
   type = string
@@ -395,7 +316,8 @@ variable "version_gitlab" {
 variable "enable_gitlab" {
   type = string
 }
-
+*/
+/*
 ###################################### RabbitMQ ######################################
 variable "rabbitmq_host" {
   type = string
@@ -409,6 +331,7 @@ variable "rabbitmq_erlangcookie" {
 variable "rabbitmq_replicaCount" {
   type = number
 }
+*/
 ###################################### pgadmin4 ######################################
 variable "pgadmin4_admin_password" {
   type = string
@@ -419,6 +342,7 @@ variable "pgadmin4_domain" {
 variable "pgadmin4_admin_email" {
   type = string
 }
+/*
 ###################################### gitlab-runner ######################################
 variable "gitlabRunnerRegistrationToken" {
   type = string
@@ -432,7 +356,7 @@ variable "gitlab_runner_docker_io_auth" {
 variable "gitlab_runner_tags" {
   type = string
 }
-
+*/
 ###################################### kube-prometheus stack ######################################
 
 variable "grafana_admin_password" {
@@ -458,7 +382,7 @@ variable "alertmanager_smtp_address" {
 variable "alertmanager_smtp_password" {
   type = string
 }
-
+/*
 variable "grafana_gitlab_application_id" {
   type = string
 }
@@ -470,7 +394,7 @@ variable "grafana_gitlab_secret" {
 variable "telegram_bot_admins" {
   type = string
 }
-
+*/
 variable "telegram_token" {
   type = string
 }
@@ -479,6 +403,7 @@ variable "telegram_chat_id" {
   type = string
 }
 
+/*
 ###################################### nfs-provisioner ######################################
 
 variable "nfs_disk_size" {
@@ -497,6 +422,7 @@ variable "dns_zones_rs" {
 variable "istio_auth" {
     type = string
 }
+*/
 ##################################### Loki ################################################
 variable "loki_bucket_name" {
     type = string
@@ -510,6 +436,7 @@ variable "s3_service_account_loki" {
     type = string
 }
 
+/*
 ###################################### Sentry #############################################
 variable "sentry_username" {
     type = string
@@ -549,3 +476,4 @@ variable "centrifugo_admin_secret" {
 variable "centrifugo_api_key" {
     type = string
 }
+*/

@@ -42,115 +42,31 @@ variable "location_subnets" {
   description = ""
   default     = ""
 }
-variable "pg_git_name" {
+variable "pg_defihelper_user_name" {
   description = ""
   default     = ""
 }
-variable "pg_git_password" {
+variable "pg_defihelper_user_password" {
   description = ""
   default     = ""
 }
-variable "pg_git_conn_limit" {
+variable "pg_defihelper_user_conn_limit" {
   description = ""
   default     = ""
 }
-variable "pg_fs_user_name" {
+variable "pg_scanner_user_name" {
   description = ""
   default     = ""
 }
-variable "pg_fs_user_password" {
+variable "pg_scanner_user_password" {
   description = ""
   default     = ""
 }
-variable "pg_fs_user_conn_limit" {
+variable "pg_scanner_user_conn_limit" {
   description = ""
   default     = ""
 }
 variable "pg_public_ip" {
   description = ""
   default     = false
-}
-variable "pg_web_user_name" {
-  description = ""
-  default     = ""
-}
-variable "pg_web_user_password" {
-  description = ""
-  default     = ""
-}
-variable "pg_web_user_conn_limit" {
-  description = ""
-  default     = ""
-}
-variable "pg_auth_user_name" {
-  description = ""
-  default     = ""
-}
-variable "pg_auth_user_password" {
-  description = ""
-  default     = ""
-}
-variable "pg_auth_user_conn_limit" {
-  description = ""
-  default     = ""
-}
-variable "pg_chat_user_name" {
-  description = ""
-  default     = ""
-}
-variable "pg_chat_user_password" {
-  description = ""
-  default     = ""
-}
-variable "pg_chat_user_conn_limit" {
-  description = ""
-  default     = ""
-}
-variable "pg_sentry_user_name" {
-  description = ""
-  default     = ""
-}
-variable "pg_sentry_user_password" {
-  description = ""
-  default     = ""
-}
-variable "pg_sentry_user_conn_limit" {
-  description = ""
-  default     = ""
-}
-variable "pg_gateway_user_name" {
-  description = ""
-  default     = ""
-}
-variable "pg_gateway_user_password" {
-  description = ""
-  default     = ""
-}
-variable "pg_gateway_user_conn_limit" {
-  description = ""
-  default     = ""
-}
-variable "pg_telegram_user_name" {
-  description = ""
-  default     = ""
-}
-variable "pg_telegram_user_password" {
-  description = ""
-  default     = ""
-}
-variable "pg_telegram_user_conn_limit" {
-  description = ""
-  default     = ""
-}
-variable "pg_billing_user_name" {
-  description = ""
-  default     = ""
-}
-variable "pg_billing_user_password" {
-  description = ""
-  default     = ""
-}
-variable "pg_billing_user_conn_limit" {
-  description = ""
-  default     = ""
 }

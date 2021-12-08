@@ -31,10 +31,10 @@ terraform {
 
   backend "remote" {
     hostname     = "app.terraform.io"
-    organization = "antitreningi"
+    organization = "adcorn"
 
     workspaces {
-      name = "yandex-development"
+      name = "defihelper-development"
     }
   }
 }

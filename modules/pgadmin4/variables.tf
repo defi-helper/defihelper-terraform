@@ -13,13 +13,3 @@ variable "pgadmin4_admin_email" {
 variable "node_selector" {
   type = map(string)
 }
-variable "ssl_1iu_ru_crt" {
-  type = string
-}
-variable "ssl_1iu_ru_key" {
-  type = string
-}
-
-
-
-

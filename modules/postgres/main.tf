@@ -18,28 +18,10 @@ resource "yandex_mdb_postgresql_cluster" "replicated_database_instance" {
     password   = var.pg_admin_password
     conn_limit = var.pg_admin_conn_limit
     permission {
-      database_name = "filestorage"
+      database_name = "defihelper"
     }
     permission {
-      database_name = "webinar"
-    }
-    permission {
-      database_name = "auth"
-    }
-    permission {
-      database_name = "chat"
-    }
-    permission {
-      database_name = "telegram"
-    }
-    permission {
-      database_name = "sentry"
-    }
-    permission {
-      database_name = "gateway"
-    }
-    permission {
-      database_name = "billing"
+      database_name = "scanner"
     }
   }
 
@@ -49,122 +31,24 @@ resource "yandex_mdb_postgresql_cluster" "replicated_database_instance" {
   }
 
   user {
-    name       = var.pg_git_name
-    password   = var.pg_git_password
-    conn_limit = var.pg_git_conn_limit
+    name       = var.pg_defihelper_user_name
+    password   = var.pg_defihelper_user_password
+    conn_limit = var.pg_defihelper_user_conn_limit
   }
 
   database {
-    name  = "git"
-    owner = var.pg_git_name
-    extension {
-      name = "btree_gist"
-    }
-    extension {
-      name = "pg_trgm"
-    }
+    name  = "defihelper"
+    owner = var.pg_defihelper_user_name
   }
   user {
-    name       = var.pg_fs_user_name
-    password   = var.pg_fs_user_password
-    conn_limit = var.pg_fs_user_conn_limit
+    name       = var.pg_scanner_user_name
+    password   = var.pg_scanner_user_password
+    conn_limit = var.pg_scanner_user_conn_limit
   }
 
   database {
-    name       = "filestorage"
-    owner      = var.pg_fs_user_name
-    lc_collate = "ru_RU.UTF-8"
-    lc_type    = "ru_RU.UTF-8"
-  }
-
-  user {
-    name       = var.pg_web_user_name
-    password   = var.pg_web_user_password
-    conn_limit = var.pg_web_user_conn_limit
-  }
-
-  database {
-    name  = "webinar"
-    owner = var.pg_web_user_name
-    lc_collate = "ru_RU.UTF-8"
-    lc_type    = "ru_RU.UTF-8"
-  }
-
-  user {
-    name       = var.pg_auth_user_name
-    password   = var.pg_auth_user_password
-    conn_limit = var.pg_auth_user_conn_limit
-  }
-
-  database {
-    name  = "auth"
-    owner = var.pg_auth_user_name
-    lc_collate = "ru_RU.UTF-8"
-    lc_type    = "ru_RU.UTF-8"
-  }
-
-  user {
-    name       = var.pg_chat_user_name
-    password   = var.pg_chat_user_password
-    conn_limit = var.pg_chat_user_conn_limit
-  }
-
-  database {
-    name  = "chat"
-    owner = var.pg_chat_user_name
-    lc_collate = "ru_RU.UTF-8"
-    lc_type    = "ru_RU.UTF-8"
-  }
-
-  user {
-    name       = var.pg_sentry_user_name
-    password   = var.pg_sentry_user_password
-    conn_limit = var.pg_sentry_user_conn_limit
-  }
-
-  database {
-    name  = "sentry"
-    owner = var.pg_sentry_user_name
-    extension {
-      name = "citext"
-    }
-  }
-
-  user {
-    name       = var.pg_gateway_user_name
-    password   = var.pg_gateway_user_password
-    conn_limit = var.pg_gateway_user_conn_limit
-  }
-
-  database {
-    name  = "gateway"
-    owner = var.pg_gateway_user_name
-    lc_collate = "ru_RU.UTF-8"
-    lc_type    = "ru_RU.UTF-8"
-  }
-
-  user {
-    name       = var.pg_telegram_user_name
-    password   = var.pg_telegram_user_password
-    conn_limit = var.pg_telegram_user_conn_limit
-  }
-
-  database {
-    name  = "telegram"
-    owner = var.pg_telegram_user_name
-    lc_collate = "ru_RU.UTF-8"
-    lc_type    = "ru_RU.UTF-8"
-  }
-
-  user {
-    name       = var.pg_billing_user_name
-    password   = var.pg_billing_user_password
-    conn_limit = var.pg_billing_user_conn_limit
-  }
-
-  database {
-    name  = "billing"
-    owner = var.pg_billing_user_name
+    name       = "scanner"
+    owner      = var.pg_scanner_user_name
     lc_collate = "ru_RU.UTF-8"
     lc_type    = "ru_RU.UTF-8"
   }
