@@ -45,6 +45,7 @@ locals {
 resource "helm_release" "pgadmin4" {
   name       = "pgadmin4"
   namespace  = "services"
+  create_namespace = "true"
   repository = "https://helm.runix.net/"
   chart      = "pgadmin4"
   version    = "1.6.1"
