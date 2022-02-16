@@ -15,7 +15,7 @@ resource "helm_release" "gitlab-runner" {
 
   set {
     name  = "gitlabUrl"
-    value = "https://gitlab.1iu.ru/"
+    value = "https://adcorn-prod.gitlab.yandexcloud.net"
   }
   set {
     name  = "runners.env.DOCKER_AUTH_CONFIG"
