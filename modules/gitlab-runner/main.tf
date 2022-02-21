@@ -2,6 +2,7 @@ resource "helm_release" "gitlab-runner" {
   count      = var.enable_gitlab_runner ? 1 : 0
   name       = "gitlab-runner"
   namespace  = "gitlab"
+  create_namespace = true
   repository = "https://charts.gitlab.io/"
   chart      = "gitlab-runner"
   timeout    = 1800
