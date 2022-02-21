@@ -342,7 +342,7 @@ variable "pgadmin4_domain" {
 variable "pgadmin4_admin_email" {
   type = string
 }
-/*
+
 ###################################### gitlab-runner ######################################
 variable "gitlabRunnerRegistrationToken" {
   type = string
@@ -356,7 +356,7 @@ variable "gitlab_runner_docker_io_auth" {
 variable "gitlab_runner_tags" {
   type = string
 }
-*/
+
 ###################################### kube-prometheus stack ######################################
 
 variable "grafana_admin_password" {

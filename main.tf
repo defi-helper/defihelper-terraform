@@ -387,7 +387,7 @@ module "gitlab" {
   version_gitlab                 = var.version_gitlab
   dep                            = [module.cert-manager.cluster_issuers["production"]]
 }
-
+*/
 
 module "gitlab-runner" {
   source                        = "./modules/gitlab-runner"
@@ -397,7 +397,6 @@ module "gitlab-runner" {
   gitlab_runner_docker_io_auth  = var.gitlab_runner_docker_io_auth
   gitlab_runner_tags            = var.gitlab_runner_tags
 }
-*/
 /*
 module "rabbitmq" {
   source                = "./modules/rabbit"
