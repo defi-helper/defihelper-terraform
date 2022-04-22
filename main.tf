@@ -282,27 +282,27 @@ module "bastion" {
   bastion_vm_image                  = "fd80mrhj8fl2oe87o4e1"
 }
 
-#module "postgres" {
-#  source                 = "./modules/postgres"
-#  name                   = "${var.cluster_name}-postgres"
-#  folder_id              = var.yandex_folder_id
-#  vpc_id                 = module.vpc.vpc_id
-#  pg_version             = var.pg_version
-#  pg_tier_id             = var.pg_tier_id
-#  pg_instance_disk_size  = var.pg_instance_disk_size
-#  pg_admin_name          = var.pg_admin_name
-#  pg_admin_password      = var.pg_admin_password
-#  pg_admin_conn_limit    = var.pg_admin_conn_limit
-#  pg_defihelper_user_name            = var.pg_defihelper_user_name
-#  pg_defihelper_user_password        = var.pg_defihelper_user_password
-#  pg_defihelper_user_conn_limit      = var.pg_defihelper_user_conn_limit
-#  pg_scanner_user_name        = var.pg_scanner_user_name
-#  pg_scanner_user_password    = var.pg_scanner_user_password
-#  pg_scanner_user_conn_limit  = var.pg_scanner_user_conn_limit
-#  enable_replication     = var.enable_replication
-#  location_subnets       = module.vpc.location_subnets
-#  pg_public_ip           = var.pg_public_ip
-#}
+module "postgres" {
+  source                 = "./modules/postgres"
+  name                   = "${var.cluster_name}-postgres"
+  folder_id              = var.yandex_folder_id
+  vpc_id                 = module.vpc.vpc_id
+  pg_version             = var.pg_version
+  pg_tier_id             = var.pg_tier_id
+  pg_instance_disk_size  = var.pg_instance_disk_size
+  pg_admin_name          = var.pg_admin_name
+  pg_admin_password      = var.pg_admin_password
+  pg_admin_conn_limit    = var.pg_admin_conn_limit
+  pg_defihelper_user_name            = var.pg_defihelper_user_name
+  pg_defihelper_user_password        = var.pg_defihelper_user_password
+  pg_defihelper_user_conn_limit      = var.pg_defihelper_user_conn_limit
+  pg_scanner_user_name        = var.pg_scanner_user_name
+  pg_scanner_user_password    = var.pg_scanner_user_password
+  pg_scanner_user_conn_limit  = var.pg_scanner_user_conn_limit
+  enable_replication     = var.enable_replication
+  location_subnets       = module.vpc.location_subnets
+  pg_public_ip           = var.pg_public_ip
+}
 
 /*
 module "mysql" {
