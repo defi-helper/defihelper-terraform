@@ -24,7 +24,7 @@ resource "helm_release" "cert-manager" {
   name = "cert-manager"
   repository = "https://charts.jetstack.io"
   chart = "cert-manager"
-  version = "v1.3.0"
+  version = "v1.8.0"
   namespace = kubernetes_namespace.cert-manager.metadata[0].name
   values = [yamlencode(local.values)]
   depends_on = [module.crds.req]
