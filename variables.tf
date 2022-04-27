@@ -256,6 +256,18 @@ variable "pg_scanner_user_conn_limit" {
   description = ""
   default     = ""
 }
+variable "pg_adapters_user_name" {
+  description = ""
+  default     = ""
+}
+variable "pg_adapters_user_password" {
+  description = ""
+  default     = ""
+}
+variable "pg_adapters_user_conn_limit" {
+  description = ""
+  default     = ""
+}
 ###################################### Managed Database End ######################################
 /*
 ###################################### Gitlab ######################################

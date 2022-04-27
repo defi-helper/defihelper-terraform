@@ -23,6 +23,9 @@ resource "yandex_mdb_postgresql_cluster" "replicated_database_instance" {
     permission {
       database_name = "scanner"
     }
+    permission {
+      database_name = "adapters"
+    }
   }
 
   database {
@@ -40,6 +43,7 @@ resource "yandex_mdb_postgresql_cluster" "replicated_database_instance" {
     name  = "defihelper"
     owner = var.pg_defihelper_user_name
   }
+
   user {
     name       = var.pg_scanner_user_name
     password   = var.pg_scanner_user_password
@@ -49,6 +53,19 @@ resource "yandex_mdb_postgresql_cluster" "replicated_database_instance" {
   database {
     name       = "scanner"
     owner      = var.pg_scanner_user_name
+    lc_collate = "ru_RU.UTF-8"
+    lc_type    = "ru_RU.UTF-8"
+  }
+
+  user {
+    name       = var.pg_adapters_user_name
+    password   = var.pg_adapters_user_password
+    conn_limit = var.pg_adapters_user_conn_limit
+  }
+
+  database {
+    name       = "adapters"
+    owner      = var.pg_adapters_user_name
     lc_collate = "ru_RU.UTF-8"
     lc_type    = "ru_RU.UTF-8"
   }
