@@ -8,8 +8,8 @@ runners:
           cpu_request = "200m"
           cpu_request_overwrite_max_allowed = "3000m"
           cpu_limit_overwrite_max_allowed = "4000m"
-          memory_limit = "6144M"
-          memory_request = "6144M"
+          memory_limit = "4096M"
+          memory_request = "4096M"
           memory_request_overwrite_max_allowed = "8192M"
           memory_limit_overwrite_max_allowed = "10240M"
     nodeSelector:
