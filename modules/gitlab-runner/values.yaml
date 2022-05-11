@@ -30,4 +30,3 @@ rbac:
     ## Run the gitlab-bastion container with the ability to deploy/manage containers of jobs
     ## cluster-wide or only within namespace
     clusterWideAccess: false
-    serviceAccountName: "gitlab-user"
