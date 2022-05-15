@@ -42,6 +42,8 @@ resource "yandex_mdb_postgresql_cluster" "replicated_database_instance" {
   database {
     name  = "defihelper"
     owner = var.pg_defihelper_user_name
+    lc_collate = "en_US.UTF-8"
+    lc_type    = "en_US.UTF-8"
   }
 
   user {
@@ -53,8 +55,8 @@ resource "yandex_mdb_postgresql_cluster" "replicated_database_instance" {
   database {
     name       = "scanner"
     owner      = var.pg_scanner_user_name
-    lc_collate = "ru_RU.UTF-8"
-    lc_type    = "ru_RU.UTF-8"
+    lc_collate = "en_US.UTF-8"
+    lc_type    = "en_US.UTF-8"
   }
 
   user {
@@ -66,8 +68,8 @@ resource "yandex_mdb_postgresql_cluster" "replicated_database_instance" {
   database {
     name       = "adapters"
     owner      = var.pg_adapters_user_name
-    lc_collate = "ru_RU.UTF-8"
-    lc_type    = "ru_RU.UTF-8"
+    lc_collate = "en_US.UTF-8"
+    lc_type    = "en_US.UTF-8"
   }
 
   dynamic "host" {
