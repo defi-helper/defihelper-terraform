@@ -299,6 +299,9 @@ module "postgres" {
   pg_scanner_user_name        = var.pg_scanner_user_name
   pg_scanner_user_password    = var.pg_scanner_user_password
   pg_scanner_user_conn_limit  = var.pg_scanner_user_conn_limit
+  pg_open_user_name        = var.pg_open_user_name
+  pg_open_user_password    = var.pg_open_user_password
+  pg_open_user_conn_limit  = var.pg_open_user_conn_limit
   pg_adapters_user_name        = var.pg_adapters_user_name
   pg_adapters_user_password    = var.pg_adapters_user_password
   pg_adapters_user_conn_limit  = var.pg_adapters_user_conn_limit

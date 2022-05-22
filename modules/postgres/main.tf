@@ -72,6 +72,19 @@ resource "yandex_mdb_postgresql_cluster" "replicated_database_instance" {
     lc_type    = "en_US.UTF-8"
   }
 
+  user {
+    name       = var.pg_open_user_name
+    password   = var.pg_open_user_password
+    conn_limit = var.pg_open_user_conn_limit
+  }
+
+  database {
+    name       = "open"
+    owner      = var.pg_open_user_name
+    lc_collate = "ru_RU.UTF-8"
+    lc_type    = "ru_RU.UTF-8"
+  }
+
   dynamic "host" {
     for_each = var.enable_replication ? [for conf in var.location_subnets : {
       zone      = conf.zone
