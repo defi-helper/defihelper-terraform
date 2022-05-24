@@ -251,6 +251,7 @@ module "redis" {
 
   redis_name       = "${var.cluster_name}-redis"
   vpc_id           = module.vpc.vpc_id
+  redis_host_class = var.redis_host_class
   location_subnets = module.vpc.location_subnets
   enable_replication     = var.enable_replication
 }

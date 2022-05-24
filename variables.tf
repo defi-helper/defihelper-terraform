@@ -451,3 +451,8 @@ variable "centrifugo_api_key" {
     type = string
 }
 */
+
+#################################### Redis ###########################################
+variable "redis_host_class" {
+  type = string
+}

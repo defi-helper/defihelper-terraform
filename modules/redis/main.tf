@@ -3,13 +3,17 @@ resource "yandex_mdb_redis_cluster" "redis_regional" {
   environment = "PRESTABLE"
   network_id  = var.vpc_id
 
+  timeouts {
+    create = "60m"
+  }
+
   config {
     password = local.password
     version  = "6.0"
   }
 
   resources {
-    resource_preset_id = "b2.nano"
+    resource_preset_id = var.redis_host_class
     disk_size          = 16
   }
 

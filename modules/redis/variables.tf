@@ -14,3 +14,6 @@ variable "enable_replication" {
   description = ""
   default     = ""
 }
+variable "redis_host_class" {
+  type = string
+}
