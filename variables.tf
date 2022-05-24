@@ -182,56 +182,6 @@ variable "location_subnets" {
   description = ""
   default     = ""
 }
-/*
-variable "mysql_tier_id" {
-  description = ""
-  default     = ""
-}
-variable "mysql_version" {
-  description = ""
-  default     = ""
-}
-variable "mysql_instance_disk_size" {
-  description = ""
-  default     = ""
-}
-variable "mysql_admin_name" {
-  description = ""
-  default     = ""
-}
-variable "mysql_admin_password" {
-  description = ""
-  default     = ""
-}
-variable "mysql_admin_conn_limit" {
-  description = ""
-  default     = ""
-}
-variable "mysql_antitreningi_name" {
-  description = ""
-  default     = ""
-}
-variable "mysql_antitreningi_password" {
-  description = ""
-  default     = ""
-}
-variable "mysql_antitreningi_conn_limit" {
-  description = ""
-  default     = ""
-}
-variable "mysql_oplatakursov_name" {
-  description = ""
-  default     = ""
-}
-variable "mysql_oplatakursov_password" {
-  description = ""
-  default     = ""
-}
-variable "mysql_oplatakursov_conn_limit" {
-  description = ""
-  default     = ""
-}
-*/
 variable "pg_defihelper_user_name" {
   description = ""
   default     = ""
@@ -341,7 +291,7 @@ variable "enable_gitlab" {
   type = string
 }
 */
-/*
+
 ###################################### RabbitMQ ######################################
 variable "rabbitmq_host" {
   type = string
@@ -355,7 +305,7 @@ variable "rabbitmq_erlangcookie" {
 variable "rabbitmq_replicaCount" {
   type = number
 }
-*/
+
 ###################################### pgadmin4 ######################################
 variable "pgadmin4_admin_password" {
   type = string
