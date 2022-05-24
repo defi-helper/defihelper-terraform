@@ -88,6 +88,7 @@ resource "helm_release" "rabbitmq" {
   version           = "8.20.0"
   values            = [yamlencode(local.rabbit)]
   depends_on        = [var.dep]
+  timeout           = 1200
 
   dynamic "set" {
     for_each = [for a in local.le_annotations : {
