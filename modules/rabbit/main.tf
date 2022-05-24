@@ -30,6 +30,9 @@ locals{
     nodeSelector = {
       group_name = "service"
     }
+    clustering = {
+      forceBoot = true
+    }
     metrics = {
       enabled = true
       serviceMonitor = {
