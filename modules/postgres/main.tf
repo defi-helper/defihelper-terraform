@@ -103,7 +103,7 @@ resource "yandex_mdb_postgresql_cluster" "replicated_database_instance" {
 }
 
 resource "yandex_mdb_postgresql_cluster" "postgresql_cluster" {
-  name        = var.name
+  name        = "${var.name}-cluster"
   folder_id   = var.folder_id
   environment = "PRODUCTION"
   network_id  = var.vpc_id
