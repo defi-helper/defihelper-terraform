@@ -55,9 +55,27 @@ locals {
         "enable-real-ip" = "true"
         "forwarded-for-header" = "CF-Connecting-IP"
       }
+      resources = {
+        "limits" = {
+          "cpu" = "4000m"
+          "memory" = var.nginx_ingress_memory_request
+        }
+        "requests" = {
+          "cpu" = var.nginx_ingress_cpu_request
+          "memory" = var.nginx_ingress_memory_request
+        }
+      }
+      autoscaling = {
+        "enabled" = "enable"
+        "maxReplicas" = var.nginx_ingress_replicacount_max
+        "minReplicas" = var.nginx_ingress_replicacount
+        "targetCPUUtilizationPercentage" = 70
+        "targetMemoryUtilizationPercentage" = 70
+      }
     }
     defaultBackend = {
       enabled = true
+      replicaCount = var.nginx_ingress_backend_replicacount
       nodeSelector = var.node_selector
       "tolerations" =[{
         "effect" = "NoSchedule"
@@ -66,6 +84,16 @@ locals {
         "value" = "true"
       }
       ]
+      resources = {
+        "limits" = {
+          "cpu" = "500m"
+          "memory" = "30Mi"
+        }
+        "requests" = {
+          "cpu" = "100m"
+          "memory" = "30Mi"
+        }
+      }
     }
     tcp = {
       22 = "gitlab/gitlab-gitlab-shell:22"
@@ -80,7 +108,7 @@ resource "helm_release" "nginx-ingress" {
   create_namespace = true
   values = [yamlencode(local.values)]
   depends_on = [
-  var.dep,
-  kubernetes_namespace.ingress-nginx-ns,
+    var.dep,
+    kubernetes_namespace.ingress-nginx-ns,
   ]
 }

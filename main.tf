@@ -142,6 +142,10 @@ module "nginx-ingress" {
   node_selector    = local.node_selectors["web"]
   load_balancer_ip = var.load_balancer_ip
   nginx_ingress_replicacount = var.nginx_ingress_replicacount
+  nginx_ingress_backend_replicacount = var.nginx_ingress_backend_replicacount
+  nginx_ingress_replicacount_max = var.nginx_ingress_replicacount_max
+  nginx_ingress_cpu_request = var.nginx_ingress_cpu_request
+  nginx_ingress_memory_request = var.nginx_ingress_memory_request
 }
 
 provider "kubectl" {

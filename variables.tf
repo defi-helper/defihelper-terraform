@@ -85,6 +85,21 @@ variable "load_balancer_ip" {
 variable "nginx_ingress_replicacount" {
   type = number
 }
+variable "nginx_ingress_backend_replicacount" {
+  type = number
+}
+
+variable "nginx_ingress_replicacount_max" {
+  type = number
+}
+
+variable "nginx_ingress_cpu_request" {
+  type = string
+}
+
+variable "nginx_ingress_memory_request" {
+  type = string
+}
 variable "admin_email" {
   type = string
 }
