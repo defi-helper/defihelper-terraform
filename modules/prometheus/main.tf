@@ -320,6 +320,48 @@ locals {
           }
           metricsQuery = "rabbitmq_queue_messages {queue=\"tasks_default\"} - rabbitmq_queue_consumers {queue=\"tasks_default\"} + 10"
         },
+        {
+          seriesQuery = "{__name__=~\"^rabbitmq_queue_messages$\"}"
+          resources = {
+            overrides = {
+              namespace = {
+                resource = "namespace"
+              }
+              pod = {
+                resource = "pod"
+              }
+              service = {
+                resource = "service"
+              }
+            }
+          }
+          name = {
+            matches = "^(.*)"
+            as = "rabbitmq_backend_history_messages_ready"
+          }
+          metricsQuery = "rabbitmq_queue_messages {queue=\"tasks_metricHistory\"} - rabbitmq_queue_consumers {queue=\"tasks_metricHistory\"} + 10"
+        },
+        {
+          seriesQuery = "{__name__=~\"^rabbitmq_queue_messages$\"}"
+          resources = {
+            overrides = {
+              namespace = {
+                resource = "namespace"
+              }
+              pod = {
+                resource = "pod"
+              }
+              service = {
+                resource = "service"
+              }
+            }
+          }
+          name = {
+            matches = "^(.*)"
+            as = "rabbitmq_backend_metrics_messages_ready"
+          }
+          metricsQuery = "rabbitmq_queue_messages {queue=\"tasks_metricCurrent\"} - rabbitmq_queue_consumers {queue=\"tasks_metricCurrent\"} + 10"
+        },
       ]
     }
   }
