@@ -8,6 +8,7 @@ locals {
   cluster_service_account_name      = "${var.cluster_name}-cluster"
   cluster_node_service_account_name = "${var.cluster_name}-node"
   container_registry_sa_name        = "${var.cluster_name}-cr"
+  monitoring_sa_name                = "${var.cluster_name}-monitoring"
 
   cluster_node_group_configs = var.cluster_node_group_configs
   cluster_node_groups = {
@@ -85,6 +86,7 @@ module "iam" {
   cluster_service_account_name      = local.cluster_service_account_name
   cluster_node_service_account_name = local.cluster_node_service_account_name
   container_registry_sa_name        = local.container_registry_sa_name
+  monitoring_sa_name                = local.monitoring_sa_name
 }
 
 module "cluster" {
@@ -246,8 +248,19 @@ module "prometheus" {
   alertmanager_email_to       = var.alertmanager_email_to
   alertmanager_smtp_address    = var.alertmanager_smtp_address
   alertmanager_smtp_password  = var.alertmanager_smtp_password
+  grafana_gitlab_application_id    = var.grafana_gitlab_application_id
+  grafana_gitlab_secret  = var.grafana_gitlab_secret
+  telegram_bot_admins = var.telegram_bot_admins
   telegram_token = var.telegram_token
   telegram_chat_id = var.telegram_chat_id
+  monitoring_sa_api_key = module.iam.monitoring_sa_api_key
+  folder_id = var.yandex_folder_id
+  postgres_id = module.postgres.postgres_id
+  redis_id = module.redis.redis_id
+  pg_defihelper_conn_limit = var.pg_defihelper_user_conn_limit
+  pg_scanner_user_conn_limit  = var.pg_scanner_user_conn_limit
+  pg_adapters_user_conn_limit = var.pg_adapters_user_conn_limit
+  pg_open_user_conn_limit = var.pg_open_user_conn_limit
 }
 
 module "redis" {

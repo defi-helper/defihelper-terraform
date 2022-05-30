@@ -371,7 +371,7 @@ variable "alertmanager_smtp_address" {
 variable "alertmanager_smtp_password" {
   type = string
 }
-/*
+
 variable "grafana_gitlab_application_id" {
   type = string
 }
@@ -383,7 +383,7 @@ variable "grafana_gitlab_secret" {
 variable "telegram_bot_admins" {
   type = string
 }
-*/
+
 variable "telegram_token" {
   type = string
 }

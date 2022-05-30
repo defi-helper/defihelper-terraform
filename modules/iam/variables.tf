@@ -10,3 +10,6 @@ variable "cluster_node_service_account_name" {
 variable "container_registry_sa_name" {
   type = string
 }
+variable "monitoring_sa_name" {
+  type = string
+}

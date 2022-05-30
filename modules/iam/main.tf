@@ -31,3 +31,18 @@ resource "yandex_resourcemanager_folder_iam_member" "container_registry_admin" {
   role   = "container-registry.admin"
   member = "serviceAccount:${yandex_iam_service_account.container_registry.id}"
 }
+
+resource "yandex_iam_service_account" "monitoring" {
+  name = var.monitoring_sa_name
+}
+
+resource "yandex_resourcemanager_folder_iam_member" "monitoring_admin" {
+  folder_id = data.yandex_resourcemanager_folder.cluster_folder.id
+  role   = "monitoring.viewer"
+  member = "serviceAccount:${yandex_iam_service_account.monitoring.id}"
+}
+
+resource "yandex_iam_service_account_api_key" "monitoring-sa-api-key" {
+  service_account_id = yandex_iam_service_account.monitoring.id
+  description        = "api key for monitoring"
+}
