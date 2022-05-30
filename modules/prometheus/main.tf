@@ -295,9 +295,9 @@ locals {
           }
           name = {
             matches = "^(.*)"
-            as = "rabbitmq_converter_messages_ready"
+            as = "rabbitmq_scanner_queue_messages_ready"
           }
-          metricsQuery = "rabbitmq_queue_messages {queue=\"filestorage:converter\"} - rabbitmq_queue_consumers {queue=\"filestorage:converter\"} + 10"
+          metricsQuery = "rabbitmq_queue_messages {queue=\"scanner_tasks_default\"} - rabbitmq_queue_consumers {queue=\"scanner_tasks_default\"} + 10"
         },
         {
           seriesQuery = "{__name__=~\"^rabbitmq_queue_messages$\"}"
@@ -316,178 +316,10 @@ locals {
           }
           name = {
             matches = "^(.*)"
-            as = "rabbitmq_service_messages_ready"
+            as = "rabbitmq_backend_queue_messages_ready"
           }
-          metricsQuery = "rabbitmq_queue_messages {queue=\"filestorage:service\"} - rabbitmq_queue_consumers {queue=\"filestorage:service\"} + 10"
+          metricsQuery = "rabbitmq_queue_messages {queue=\"tasks_default\"} - rabbitmq_queue_consumers {queue=\"tasks_default\"} + 10"
         },
-        {
-          seriesQuery = "{__name__=~\"^rabbitmq_queue_messages$\"}"
-          resources = {
-            overrides = {
-              namespace = {
-                resource = "namespace"
-              }
-              pod = {
-                resource = "pod"
-              }
-              service = {
-                resource = "service"
-              }
-            }
-          }
-          name = {
-            matches = "^(.*)"
-            as = "rabbitmq_basic_messages_ready"
-          }
-          metricsQuery = "rabbitmq_queue_messages {queue=\"filestorage:basic\"} - rabbitmq_queue_consumers {queue=\"filestorage:basic\"} + 10"
-        },
-        {
-          seriesQuery = "{__name__=~\"^rabbitmq_queue_messages$\"}"
-          resources = {
-            overrides = {
-              namespace = {
-                resource = "namespace"
-              }
-              pod = {
-                resource = "pod"
-              }
-              service = {
-                resource = "service"
-              }
-            }
-          }
-          name = {
-            matches = "^(.*)"
-            as = "rabbitmq_uploader_messages_ready"
-          }
-          metricsQuery = "rabbitmq_queue_messages {queue=\"filestorage:uploader\"} - rabbitmq_queue_consumers {queue=\"filestorage:uploader\"} + 10"
-        },
-        {
-          seriesQuery = "{__name__=~\"^rabbitmq_queue_messages$\"}"
-          resources = {
-            overrides = {
-              namespace = {
-                resource = "namespace"
-              }
-              pod = {
-                resource = "pod"
-              }
-              service = {
-                resource = "service"
-              }
-            }
-          }
-          name = {
-            matches = "^(.*)"
-            as = "rabbitmq_webinar_messages_ready"
-          }
-          metricsQuery = "rabbitmq_queue_messages {queue=\"filestorage:webinar\"} - rabbitmq_queue_consumers {queue=\"filestorage:webinar\"} + 10"
-        },
-        {
-          seriesQuery = "{__name__=~\"^rabbitmq_queue_messages$\"}"
-          resources = {
-            overrides = {
-              namespace = {
-                resource = "namespace"
-              }
-              pod = {
-                resource = "pod"
-              }
-              service = {
-                resource = "service"
-              }
-            }
-          }
-          name = {
-            matches = "^(.*)"
-            as = "rabbitmq_ok_queue_messages_ready"
-          }
-          metricsQuery = "rabbitmq_queue_messages {queue=\"ok:queue\"} - rabbitmq_queue_consumers {queue=\"ok:queue\"} + 10"
-        },
-        {
-          seriesQuery = "{__name__=~\"^rabbitmq_queue_messages$\"}"
-          resources = {
-            overrides = {
-              namespace = {
-                resource = "namespace"
-              }
-              pod = {
-                resource = "pod"
-              }
-              service = {
-                resource = "service"
-              }
-            }
-          }
-          name = {
-            matches = "^(.*)"
-            as = "rabbitmq_billing_basic_messages_ready"
-          }
-          metricsQuery = "rabbitmq_queue_messages {queue=\"billing:basic\"} - rabbitmq_queue_consumers {queue=\"billing:basic\"} + 10"
-        },
-        {
-          seriesQuery = "{__name__=~\"^rabbitmq_queue_messages$\"}"
-          resources = {
-            overrides = {
-              namespace = {
-                resource = "namespace"
-              }
-              pod = {
-                resource = "pod"
-              }
-              service = {
-                resource = "service"
-              }
-            }
-          }
-          name = {
-            matches = "^(.*)"
-            as = "rabbitmq_at_mail_messages_ready"
-          }
-          metricsQuery = "rabbitmq_queue_messages {queue=\"at:mail\"} - rabbitmq_queue_consumers {queue=\"at:mail\"} + 10"
-        },
-        {
-          seriesQuery = "{__name__=~\"^rabbitmq_queue_messages$\"}"
-          resources = {
-            overrides = {
-              namespace = {
-                resource = "namespace"
-              }
-              pod = {
-                resource = "pod"
-              }
-              service = {
-                resource = "service"
-              }
-            }
-          }
-          name = {
-            matches = "^(.*)"
-            as = "rabbitmq_chat_queue_messages_ready"
-          }
-          metricsQuery = "rabbitmq_queue_messages {queue=\"chat:queue\"} - rabbitmq_queue_consumers {queue=\"chat:queue\"} + 10"
-        },
-        {
-          seriesQuery = "{__name__=~\"^pfp_fpm_active_processes$\"}"
-          resources = {
-            overrides = {
-              namespace = {
-                resource = "namespace"
-              }
-              pod = {
-                resource = "pod"
-              }
-              service = {
-                resource = "service"
-              }
-            }
-          }
-          name = {
-            matches = "^(.*)"
-            as = "php_fpm_active_processes_ok"
-          }
-          metricsQuery = "sum(phpfpm_active_processes{service=\"ok-backend-sm\"}) / sum(kube_deployment_status_replicas {deployment=\"ok-backend\"})"
-        }
       ]
     }
   }
