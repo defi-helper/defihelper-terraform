@@ -411,3 +411,8 @@ module "service-account" {
   source = "./modules/service-account"
 }
 */
+
+module "node-local-dns" {
+  source           = "./modules/node-local-dns"
+  enable_node_local_dns    = var.enable_node_local_dns
+}

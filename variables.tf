@@ -471,3 +471,8 @@ variable "centrifugo_api_key" {
 variable "redis_host_class" {
   type = string
 }
+
+###################################### node-local-dns #############################################
+variable "enable_node_local_dns" {
+  type = string
+}
