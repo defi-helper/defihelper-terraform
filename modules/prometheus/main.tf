@@ -145,6 +145,21 @@ locals {
             }]
           },
           {
+            name = "PostgresBaConnLimitReached"
+            rules = [{
+              alert = "PostgresBaConnLimit"
+              expr = "(pooler_ppen_tcp_connections + ${var.pg_ba_user_conn_limit}/100*10  >= ${var.pg_ba_user_conn_limit})"
+              for = "0m"
+              labels = {
+                severity = "critical"
+              }
+              annotations = {
+                summary = "Postgres Ba connections limit reached"
+                description = "Postgres Ba connections limit reached"
+              }
+            }]
+          },
+          {
             name = "RabbitmqTooManyMessagesInQueue"
             rules = [{
               alert = "RabbitmqTooManyMessagesInQueue"
