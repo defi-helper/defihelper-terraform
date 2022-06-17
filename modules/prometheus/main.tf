@@ -524,7 +524,7 @@ locals {
           }
           name = {
             matches = "^(.*)"
-            as = "rabbitmq_scanner_queue_messages_ready"
+            as = "rabbitmq_watcher_queue_messages_ready"
           }
           metricsQuery = "rabbitmq_queue_messages {queue=\"scanner_tasks_default\"} - rabbitmq_queue_consumers {queue=\"scanner_tasks_default\"} + 10"
         },
