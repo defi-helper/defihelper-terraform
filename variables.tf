@@ -12,7 +12,7 @@ variable "cluster_name" {
 }
 variable "cluster_version" {
   type    = string
-  default = "1.20"
+  default = "1.21"
 }
 variable "cluster_release_channel" {
   type    = string

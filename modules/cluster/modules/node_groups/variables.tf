@@ -3,7 +3,7 @@ variable "cluster_id" {
 }
 variable "kube_version" {
   type = string
-  default = "1.20"
+  default = "1.21"
 }
 variable "location_subnets" {
   type = list(object({

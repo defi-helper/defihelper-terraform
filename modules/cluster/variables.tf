@@ -11,7 +11,7 @@ variable "region" {
 }
 variable "kube_version" {
   type = string
-  default = "1.20"
+  default = "1.21"
 }
 variable "release_channel" {
   type = string
