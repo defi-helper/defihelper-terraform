@@ -9,7 +9,7 @@ resource "yandex_mdb_redis_cluster" "redis_regional" {
 
   config {
     password = local.password
-    version  = "6.0"
+    version  = "6.2"
   }
 
   resources {
