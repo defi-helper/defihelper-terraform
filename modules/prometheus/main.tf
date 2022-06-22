@@ -164,7 +164,7 @@ locals {
             rules = [{
               alert = "RabbitmqTooManyMessagesInQueue"
               expr = "rabbitmq_queue_messages_ready > 1000"
-              for = "2m"
+              for = "10m"
               labels = {
                 severity = "critical"
               }
