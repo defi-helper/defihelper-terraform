@@ -163,7 +163,7 @@ locals {
             name = "RabbitmqTooManyMessagesInQueue"
             rules = [{
               alert = "RabbitmqTooManyMessagesInQueue"
-              expr = "rabbitmq_queue_messages_ready > 2000"
+              expr = "rabbitmq_queue_messages_ready > 3000"
               for = "5m"
               labels = {
                 severity = "critical"
@@ -178,7 +178,7 @@ locals {
             name = "KubernetesTooManyPods"
             rules = [{
               alert = "KubernetesTooManyPods"
-              expr = "count(kube_pod_info) > 1000"
+              expr = "count(kube_pod_info) > 400"
               for = "2m"
               labels = {
                 severity = "critical"
