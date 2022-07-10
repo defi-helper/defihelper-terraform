@@ -163,14 +163,14 @@ locals {
             name = "RabbitmqTooManyMessagesInQueue"
             rules = [{
               alert = "RabbitmqTooManyMessagesInQueue"
-              expr = "rabbitmq_queue_messages_ready > 1000"
+              expr = "rabbitmq_queue_messages_ready > 2000"
               for = "5m"
               labels = {
                 severity = "critical"
               }
               annotations = {
                 summary = "Rabbitmq too many messages in queue (instance {{ $labels.instance }})"
-                description = "Queue is filling up (> 1000 msgs)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+                description = "Queue is filling up (> 2000 msgs)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
               }
             }]
           },
