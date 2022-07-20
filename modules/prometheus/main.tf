@@ -627,6 +627,27 @@ locals {
           }
           metricsQuery = "rabbitmq_queue_messages {queue=\"tasks_trigger\"} - rabbitmq_queue_consumers {queue=\"tasks_trigger\"} + 20"
         },
+        {
+          seriesQuery = "{__name__=~\"^rabbitmq_queue_messages$\"}"
+          resources = {
+            overrides = {
+              namespace = {
+                resource = "namespace"
+              }
+              pod = {
+                resource = "pod"
+              }
+              service = {
+                resource = "service"
+              }
+            }
+          }
+          name = {
+            matches = "^(.*)"
+            as = "rabbitmq_backend_bctrader_messages_ready"
+          }
+          metricsQuery = "rabbitmq_queue_messages {queue=\"bctrader:queue\"} - rabbitmq_queue_consumers {queue=\"bctrader:queue\"} + 10"
+        },
       ]
     }
   }
