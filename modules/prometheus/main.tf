@@ -145,6 +145,21 @@ locals {
             }]
           },
           {
+            name = "PostgresBctraderConnLimitReached"
+            rules = [{
+              alert = "PostgresBctraderConnLimit"
+              expr = "(pooler_ppen_tcp_connections + ${var.pg_bctrader_user_conn_limit}/100*10  >= ${var.pg_bctrader_user_conn_limit})"
+              for = "0m"
+              labels = {
+                severity = "critical"
+              }
+              annotations = {
+                summary = "Postgres Bctrader connections limit reached"
+                description = "Postgres Bctrader connections limit reached"
+              }
+            }]
+          },
+          {
             name = "PostgresBaConnLimitReached"
             rules = [{
               alert = "PostgresBaConnLimit"

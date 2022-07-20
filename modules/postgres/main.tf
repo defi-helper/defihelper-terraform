@@ -86,6 +86,19 @@ resource "yandex_mdb_postgresql_cluster" "postgresql_cluster" {
   }
 
   user {
+    name       = var.pg_bctrader_user_name
+    password   = var.pg_bctrader_user_password
+    conn_limit = var.pg_bctrader_user_conn_limit
+  }
+
+  database {
+    name       = "bctrader"
+    owner      = var.pg_bctrader_user_name
+    lc_collate = "ru_RU.UTF-8"
+    lc_type    = "ru_RU.UTF-8"
+  }
+
+  user {
     name       = var.pg_ba_user_name
     password   = var.pg_ba_user_password
     conn_limit = var.pg_ba_user_conn_limit

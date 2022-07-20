@@ -76,6 +76,10 @@ variable "pg_open_user_conn_limit" {
   description = ""
   default     = ""
 }
+variable "pg_bctrader_user_conn_limit" {
+  description = ""
+  default     = ""
+}
 variable "pg_ba_user_conn_limit" {
   description = ""
   default     = ""

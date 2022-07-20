@@ -262,6 +262,7 @@ module "prometheus" {
   pg_adapters_user_conn_limit = var.pg_adapters_user_conn_limit
   pg_open_user_conn_limit = var.pg_open_user_conn_limit
   pg_ba_user_conn_limit = var.pg_ba_user_conn_limit
+  pg_bctrader_user_conn_limit = var.pg_bctrader_user_conn_limit
 }
 
 module "redis" {
@@ -314,6 +315,9 @@ module "postgres" {
   pg_ba_user_name        = var.pg_ba_user_name
   pg_ba_user_password    = var.pg_ba_user_password
   pg_ba_user_conn_limit  = var.pg_ba_user_conn_limit
+  pg_bctrader_user_name        = var.pg_bctrader_user_name
+  pg_bctrader_user_password    = var.pg_bctrader_user_password
+  pg_bctrader_user_conn_limit  = var.pg_bctrader_user_conn_limit
   pg_adapters_user_name        = var.pg_adapters_user_name
   pg_adapters_user_password    = var.pg_adapters_user_password
   pg_adapters_user_conn_limit  = var.pg_adapters_user_conn_limit
