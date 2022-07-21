@@ -646,7 +646,7 @@ locals {
             matches = "^(.*)"
             as = "rabbitmq_backend_bctrader_messages_ready"
           }
-          metricsQuery = "rabbitmq_queue_messages {queue=\"bctrader:queue\"} - rabbitmq_queue_consumers {queue=\"bctrader:queue\"} + 10"
+          metricsQuery = "rabbitmq_queue_messages {queue=\"bctrader:queue\"} - rabbitmq_queue_consumers {queue=\"bctrader:queue\"} + 20"
         },
       ]
     }
