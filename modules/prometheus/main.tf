@@ -185,7 +185,7 @@ locals {
               }
               annotations = {
                 summary = "Rabbitmq too many messages in queue (instance {{ $labels.instance }})"
-                description = "Queue is filling up (> 2000 msgs)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+                description = "Queue is filling up (> 10000 msgs)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
               }
             }]
           },
