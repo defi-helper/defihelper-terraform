@@ -1,8 +1,3 @@
-/*
-module "crds" {
-  source = "./modules/crds"
-}
-*/
 resource "kubernetes_namespace" "prometheus" {
   metadata {
     name = "prometheus"
@@ -23,29 +18,29 @@ resource "kubernetes_secret" "prometheus-basic-auth" {
 locals {
   # workaround for https://github.com/hashicorp/terraform/issues/22405
   ingress_json = {
-  for name, config in var.configs:
-  name => lookup(config, "ingress", false) != false ? jsonencode({
-    enabled = true
-    hosts = [config["ingress"]["domain"]]
-    tls = [
-      {
-        secretName = config["ingress"]["domain"]
+    for name, config in var.configs:
+      name => lookup(config, "ingress", false) != false ? jsonencode({
+        enabled = true
         hosts = [config["ingress"]["domain"]]
-      }
-    ]
-    annotations = merge({
-      "kubernetes.io/ingress.class" = "nginx"
-      "cert-manager.io/cluster-issuer" = config["ingress"]["issuer"]
-    }, jsondecode(lookup(config, "http_auth", true) != false ? jsonencode({
-      "nginx.ingress.kubernetes.io/auth-type" = "basic"
-      "nginx.ingress.kubernetes.io/auth-secret" = kubernetes_secret.prometheus-basic-auth.metadata[0].name
-      "nginx.ingress.kubernetes.io/auth-realm" = "Authentication Required"
-    }) : jsonencode({})))
-  }) : jsonencode({})
+        tls = [
+          {
+            secretName = config["ingress"]["domain"]
+            hosts = [config["ingress"]["domain"]]
+          }
+        ]
+        annotations = merge({
+          "kubernetes.io/ingress.class" = "nginx"
+          "cert-manager.io/cluster-issuer" = config["ingress"]["issuer"]
+        }, jsondecode(lookup(config, "http_auth", true) != false ? jsonencode({
+          "nginx.ingress.kubernetes.io/auth-type" = "basic"
+          "nginx.ingress.kubernetes.io/auth-secret" = kubernetes_secret.prometheus-basic-auth.metadata[0].name
+          "nginx.ingress.kubernetes.io/auth-realm" = "Authentication Required"
+        }) : jsonencode({})))
+      }) : jsonencode({})
   }
   ingress = {
-  for name, json in local.ingress_json:
-  name => jsondecode(json)
+    for name, json in local.ingress_json:
+      name => jsondecode(json)
   }
   # end of workaround
   disabled_component = {
@@ -69,231 +64,231 @@ locals {
             }
           }]
         },
-          {
-            name = "KubernetesOomKillDetected"
-            rules = [{
-              alert = "KubernetesContainerOomKiller"
-              expr = "(kube_pod_container_status_restarts_total - kube_pod_container_status_restarts_total offset 10m >= 1) and ignoring (reason) min_over_time(kube_pod_container_status_last_terminated_reason{reason=\"OOMKilled\"}[10m]) == 1"
-              for = "0m"
-              labels = {
-                severity = "critical"
-              }
-              annotations = {
-                summary = "Kubernetes container oom killer (instance {{ $labels.instance }})"
-                description = "Container {{ $labels.container }} in pod {{ $labels.namespace }}/{{ $labels.pod }} has been OOMKilled {{ $value }} times in the last 10 minutes.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
-              }
-            }]
-          },
-          {
-            name = "PostgresDefihelperConnLimitReached"
-            rules = [{
-              alert = "PostgresDefihelperConnLimit"
-              expr = "(pooler_defihelper_tcp_connections + ${var.pg_defihelper_conn_limit}/100*10  >= ${var.pg_defihelper_conn_limit})"
-              for = "0m"
-              labels = {
-                severity = "critical"
-              }
-              annotations = {
-                summary = "Postgres Defihelper connections limit reached"
-                description = "Postgres Defihelper connections limit reached"
-              }
-            }]
-          },
-          {
-            name = "PostgresScannerConnLimitReached"
-            rules = [{
-              alert = "PostgresScannerConnLimit"
-              expr = "(pooler_scanner_tcp_connections + ${var.pg_scanner_user_conn_limit}/100*10  >= ${var.pg_scanner_user_conn_limit})"
-              for = "0m"
-              labels = {
-                severity = "critical"
-              }
-              annotations = {
-                summary = "Postgres Scanner connections limit reached"
-                description = "Postgres Scanner connections limit reached"
-              }
-            }]
-          },
-          {
-            name = "PostgresAdaptersConnLimitReached"
-            rules = [{
-              alert = "PostgresAdaptersConnLimit"
-              expr = "(pooler_adapters_tcp_connections + ${var.pg_adapters_user_conn_limit}/100*10  >= ${var.pg_adapters_user_conn_limit})"
-              for = "0m"
-              labels = {
-                severity = "critical"
-              }
-              annotations = {
-                summary = "Postgres Adapters connections limit reached"
-                description = "Postgres Adapters connections limit reached"
-              }
-            }]
-          },
-          {
-            name = "PostgresOpenConnLimitReached"
-            rules = [{
-              alert = "PostgresOpenConnLimit"
-              expr = "(pooler_ppen_tcp_connections + ${var.pg_open_user_conn_limit}/100*10  >= ${var.pg_open_user_conn_limit})"
-              for = "0m"
-              labels = {
-                severity = "critical"
-              }
-              annotations = {
-                summary = "Postgres Open connections limit reached"
-                description = "Postgres Open connections limit reached"
-              }
-            }]
-          },
-          {
-            name = "PostgresBctraderConnLimitReached"
-            rules = [{
-              alert = "PostgresBctraderConnLimit"
-              expr = "(pooler_ppen_tcp_connections + ${var.pg_bctrader_user_conn_limit}/100*10  >= ${var.pg_bctrader_user_conn_limit})"
-              for = "0m"
-              labels = {
-                severity = "critical"
-              }
-              annotations = {
-                summary = "Postgres Bctrader connections limit reached"
-                description = "Postgres Bctrader connections limit reached"
-              }
-            }]
-          },
-          {
-            name = "PostgresBaConnLimitReached"
-            rules = [{
-              alert = "PostgresBaConnLimit"
-              expr = "(pooler_ppen_tcp_connections + ${var.pg_ba_user_conn_limit}/100*10  >= ${var.pg_ba_user_conn_limit})"
-              for = "0m"
-              labels = {
-                severity = "critical"
-              }
-              annotations = {
-                summary = "Postgres Ba connections limit reached"
-                description = "Postgres Ba connections limit reached"
-              }
-            }]
-          },
-          {
-            name = "RabbitmqTooManyMessagesInQueue"
-            rules = [{
-              alert = "RabbitmqTooManyMessagesInQueue"
-              expr = "rabbitmq_queue_messages_ready > 10000"
-              for = "5m"
-              labels = {
-                severity = "critical"
-              }
-              annotations = {
-                summary = "Rabbitmq too many messages in queue (instance {{ $labels.instance }})"
-                description = "Queue is filling up (> 10000 msgs)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
-              }
-            }]
-          },
-          {
-            name = "KubernetesTooManyPods"
-            rules = [{
-              alert = "KubernetesTooManyPods"
-              expr = "count(kube_pod_info) > 400"
-              for = "2m"
-              labels = {
-                severity = "critical"
-              }
-              annotations = {
-                summary = "Kubernetes too many pods"
-                description = "Kubernetes too many pods VALUE = {{ $value }}"
-              }
-            }]
-          },
-          {
-            name = "ManagedDatabaseHighCPUusage"
-            rules = [{
-              alert = "ManagedDatabaseHighCPUusage"
-              expr = "cpu_idle < 30"
-              for = "5m"
-              labels = {
-                severity = "critical"
-              }
-              annotations = {
-                summary = "Managed Database high CPU usage (service {{ $labels.resource_id }})"
-                description = "Idle less than 30 percent\n  VALUE = {{ $value }}\n  RESOURCE = {{ $labels.resource_id }}\n  HOST = {{ $labels.host }}"
-              }
-            }]
-          },
-          {
-            name = "ManagedDatabaseHighDiskUsage"
-            rules = [{
-              alert = "ManagedDatabaseHighDiskUsage"
-              expr = "(disk_used_bytes*100) / disk_total_bytes > 85"
-              for = "5m"
-              labels = {
-                severity = "critical"
-              }
-              annotations = {
-                summary = "Managed Database high Disk usage (service {{ $labels.resource_id }})"
-                description = "Disk usage is more than 85 percent\n  VALUE = {{ $value }}\n  RESOURCE = {{ $labels.resource_id }}\n  HOST = {{ $labels.host }}"
-              }
-            }]
-          },
-          {
-            name = "NginxHighHttp4xxErrorRate"
-            rules = [{
-              alert = "NginxHighHttp4xxErrorRate"
-              expr = "sum(rate(nginx_ingress_controller_requests{status=~'^4..'}[1m])) by (ingress) / sum(rate(nginx_ingress_controller_requests[1m])) by (ingress) * 100 > 10"
-              for = "1m"
-              labels = {
-                severity = "warning"
-              }
-              annotations = {
-                summary = "Nginx high HTTP 4xx error rate (ingress - {{ $labels.ingress }})"
-                description = "Too many HTTP requests with status 4xx (> 10%)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
-              }
-            }]
-          },
-          {
-            name = "NginxHighHttp[502,503,504]ErrorRate"
-            rules = [{
-              alert = "NginxHighHttp5xxErrorRate"
-              expr = "sum(rate(nginx_ingress_controller_requests{status=~'^50[2-4]'}[1m])) by (ingress) / sum(rate(nginx_ingress_controller_requests[1m])) by (ingress) * 100 > 5"
-              for = "1m"
-              labels = {
-                severity = "critical"
-              }
-              annotations = {
-                summary = "Nginx high HTTP [502,503,504] error rate (ingress - {{ $labels.ingress }})"
-                description = "Too many HTTP requests with status [502,503,504] (> 5%)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
-              }
-            }]
-          },
-          {
-            name = "NginxHighHttp5xxErrorRate"
-            rules = [{
-              alert = "NginxHighHttp5xxErrorRate"
-              expr = "sum(rate(nginx_ingress_controller_requests{status=~'^5..'}[1m])) by (ingress) / sum(rate(nginx_ingress_controller_requests[1m])) by (ingress) * 100 > 5"
-              for = "1m"
-              labels = {
-                severity = "warning"
-              }
-              annotations = {
-                summary = "Nginx high HTTP 5xx error rate (ingress - {{ $labels.ingress }})"
-                description = "Too many HTTP requests with status 5xx (> 5%)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
-              }
-            }]
-          },
-          {
-            name = "NginxLatencyHigh"
-            rules = [{
-              alert = "NginxLatencyHigh"
-              expr = "histogram_quantile(0.99, sum(rate(nginx_ingress_controller_request_duration_seconds_bucket[2m])) by (host, node)) > 3"
-              for = "2m"
-              labels = {
-                severity = "warning"
-              }
-              annotations = {
-                summary = "Nginx latency high (instance {{ $labels.instance }})"
-                description = "Nginx p99 latency is higher than 3 seconds\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
-              }
-            }]
+        {
+          name = "KubernetesOomKillDetected"
+          rules = [{
+            alert = "KubernetesContainerOomKiller"
+            expr = "(kube_pod_container_status_restarts_total - kube_pod_container_status_restarts_total offset 10m >= 1) and ignoring (reason) min_over_time(kube_pod_container_status_last_terminated_reason{reason=\"OOMKilled\"}[10m]) == 1"
+            for = "0m"
+            labels = {
+              severity = "critical"
+            }
+            annotations = {
+              summary = "Kubernetes container oom killer (instance {{ $labels.instance }})"
+              description = "Container {{ $labels.container }} in pod {{ $labels.namespace }}/{{ $labels.pod }} has been OOMKilled {{ $value }} times in the last 10 minutes.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+            }
           }]
+        },
+        {
+          name = "PostgresDefihelperConnLimitReached"
+          rules = [{
+            alert = "PostgresDefihelperConnLimit"
+            expr = "(pooler_defihelper_tcp_connections + ${var.pg_defihelper_conn_limit}/100*10  >= ${var.pg_defihelper_conn_limit})"
+            for = "0m"
+            labels = {
+              severity = "critical"
+            }
+            annotations = {
+              summary = "Postgres Defihelper connections limit reached"
+              description = "Postgres Defihelper connections limit reached"
+            }
+          }]
+        },
+        {
+          name = "PostgresScannerConnLimitReached"
+          rules = [{
+            alert = "PostgresScannerConnLimit"
+            expr = "(pooler_scanner_tcp_connections + ${var.pg_scanner_user_conn_limit}/100*10  >= ${var.pg_scanner_user_conn_limit})"
+            for = "0m"
+            labels = {
+              severity = "critical"
+            }
+            annotations = {
+              summary = "Postgres Scanner connections limit reached"
+              description = "Postgres Scanner connections limit reached"
+            }
+          }]
+        },
+        {
+          name = "PostgresAdaptersConnLimitReached"
+          rules = [{
+            alert = "PostgresAdaptersConnLimit"
+            expr = "(pooler_adapters_tcp_connections + ${var.pg_adapters_user_conn_limit}/100*10  >= ${var.pg_adapters_user_conn_limit})"
+            for = "0m"
+            labels = {
+              severity = "critical"
+            }
+            annotations = {
+              summary = "Postgres Adapters connections limit reached"
+              description = "Postgres Adapters connections limit reached"
+            }
+          }]
+        },
+        {
+          name = "PostgresOpenConnLimitReached"
+          rules = [{
+            alert = "PostgresOpenConnLimit"
+            expr = "(pooler_ppen_tcp_connections + ${var.pg_open_user_conn_limit}/100*10  >= ${var.pg_open_user_conn_limit})"
+            for = "0m"
+            labels = {
+              severity = "critical"
+            }
+            annotations = {
+              summary = "Postgres Open connections limit reached"
+              description = "Postgres Open connections limit reached"
+            }
+          }]
+        },
+        {
+          name = "PostgresBctraderConnLimitReached"
+          rules = [{
+            alert = "PostgresBctraderConnLimit"
+            expr = "(pooler_ppen_tcp_connections + ${var.pg_bctrader_user_conn_limit}/100*10  >= ${var.pg_bctrader_user_conn_limit})"
+            for = "0m"
+            labels = {
+              severity = "critical"
+            }
+            annotations = {
+              summary = "Postgres Bctrader connections limit reached"
+              description = "Postgres Bctrader connections limit reached"
+            }
+          }]
+        },
+        {
+          name = "PostgresBaConnLimitReached"
+          rules = [{
+            alert = "PostgresBaConnLimit"
+            expr = "(pooler_ppen_tcp_connections + ${var.pg_ba_user_conn_limit}/100*10  >= ${var.pg_ba_user_conn_limit})"
+            for = "0m"
+            labels = {
+              severity = "critical"
+            }
+            annotations = {
+              summary = "Postgres Ba connections limit reached"
+              description = "Postgres Ba connections limit reached"
+            }
+          }]
+        },
+        {
+          name = "RabbitmqTooManyMessagesInQueue"
+          rules = [{
+            alert = "RabbitmqTooManyMessagesInQueue"
+            expr = "rabbitmq_queue_messages_ready > 10000"
+            for = "5m"
+            labels = {
+              severity = "critical"
+            }
+            annotations = {
+              summary = "Rabbitmq too many messages in queue (instance {{ $labels.instance }})"
+              description = "Queue is filling up (> 10000 msgs)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+            }
+          }]
+        },
+        {
+          name = "KubernetesTooManyPods"
+          rules = [{
+            alert = "KubernetesTooManyPods"
+            expr = "count(kube_pod_info) > 400"
+            for = "2m"
+            labels = {
+              severity = "critical"
+            }
+            annotations = {
+              summary = "Kubernetes too many pods"
+              description = "Kubernetes too many pods VALUE = {{ $value }}"
+            }
+          }]
+        },
+        {
+          name = "ManagedDatabaseHighCPUusage"
+          rules = [{
+            alert = "ManagedDatabaseHighCPUusage"
+            expr = "cpu_idle < 30"
+            for = "5m"
+            labels = {
+              severity = "critical"
+            }
+            annotations = {
+              summary = "Managed Database high CPU usage (service {{ $labels.resource_id }})"
+              description = "Idle less than 30 percent\n  VALUE = {{ $value }}\n  RESOURCE = {{ $labels.resource_id }}\n  HOST = {{ $labels.host }}"
+            }
+          }]
+        },
+        {
+          name = "ManagedDatabaseHighDiskUsage"
+          rules = [{
+            alert = "ManagedDatabaseHighDiskUsage"
+            expr = "(disk_used_bytes*100) / disk_total_bytes > 85"
+            for = "5m"
+            labels = {
+              severity = "critical"
+            }
+            annotations = {
+              summary = "Managed Database high Disk usage (service {{ $labels.resource_id }})"
+              description = "Disk usage is more than 85 percent\n  VALUE = {{ $value }}\n  RESOURCE = {{ $labels.resource_id }}\n  HOST = {{ $labels.host }}"
+            }
+          }]
+        },
+        {
+          name = "NginxHighHttp4xxErrorRate"
+          rules = [{
+            alert = "NginxHighHttp4xxErrorRate"
+            expr = "sum(rate(nginx_ingress_controller_requests{status=~'^4..'}[1m])) by (ingress) / sum(rate(nginx_ingress_controller_requests[1m])) by (ingress) * 100 > 10"
+            for = "1m"
+            labels = {
+              severity = "warning"
+            }
+            annotations = {
+              summary = "Nginx high HTTP 4xx error rate (ingress - {{ $labels.ingress }})"
+              description = "Too many HTTP requests with status 4xx (> 10%)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+            }
+          }]
+        },
+        {
+          name = "NginxHighHttp[502,503,504]ErrorRate"
+          rules = [{
+            alert = "NginxHighHttp5xxErrorRate"
+            expr = "sum(rate(nginx_ingress_controller_requests{status=~'^50[2-4]'}[1m])) by (ingress) / sum(rate(nginx_ingress_controller_requests[1m])) by (ingress) * 100 > 5"
+            for = "1m"
+            labels = {
+              severity = "critical"
+            }
+            annotations = {
+              summary = "Nginx high HTTP [502,503,504] error rate (ingress - {{ $labels.ingress }})"
+              description = "Too many HTTP requests with status [502,503,504] (> 5%)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+            }
+          }]
+        },
+        {
+          name = "NginxHighHttp5xxErrorRate"
+          rules = [{
+            alert = "NginxHighHttp5xxErrorRate"
+            expr = "sum(rate(nginx_ingress_controller_requests{status=~'^5..'}[1m])) by (ingress) / sum(rate(nginx_ingress_controller_requests[1m])) by (ingress) * 100 > 5"
+            for = "1m"
+            labels = {
+              severity = "warning"
+            }
+            annotations = {
+              summary = "Nginx high HTTP 5xx error rate (ingress - {{ $labels.ingress }})"
+              description = "Too many HTTP requests with status 5xx (> 5%)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+            }
+          }]
+        },
+        {
+          name = "NginxLatencyHigh"
+          rules = [{
+            alert = "NginxLatencyHigh"
+            expr = "histogram_quantile(0.99, sum(rate(nginx_ingress_controller_request_duration_seconds_bucket[2m])) by (host, node)) > 3"
+            for = "2m"
+            labels = {
+              severity = "warning"
+            }
+            annotations = {
+              summary = "Nginx latency high (instance {{ $labels.instance }})"
+              description = "Nginx p99 latency is higher than 3 seconds\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+            }
+          }]
+        }]
       }
     }
     alertmanager = {
@@ -326,30 +321,30 @@ locals {
         }
         "receivers" = [
           {
-            "email_configs" = [
-              {
-                "to" = var.alertmanager_email_to
-                send_resolved = true
-              }
-            ]
-            "name" = "all"
+          "email_configs" = [
+            {
+              "to" = var.alertmanager_email_to
+              send_resolved = true
+            }
+          ]
+          "name" = "all"
           },
           {
-            "name" = "criticals"
-            "email_configs" = [
-              {
-                "to" = var.alertmanager_email_to
-                send_resolved = true
-              }
-            ]
-            "webhook_configs" = [
-              {
-                url = "http://alertmanager-notifier:8899/alert"
-              },
-              /*            {
-                            url = "http://alertmanager-bot:8080"
-                          }*/
-            ]
+          "name" = "criticals"
+          "email_configs" = [
+            {
+              "to" = var.alertmanager_email_to
+              send_resolved = true
+            }
+          ]
+          "webhook_configs" = [
+            {
+              url = "http://alertmanager-notifier:8899/alert"
+            },
+/*            {
+              url = "http://alertmanager-bot:8080"
+            }*/
+          ]
           }
         ]
         "route" = {
@@ -359,18 +354,18 @@ locals {
           "receiver" = "all"
           "repeat_interval" = "3h"
           "routes" = [
-            {
-              match = {
-                severity = "warning"
-              }
-              receiver = "all"
+          {
+            match = {
+              severity = "warning"
+            }
+            receiver = "all"
             },
             {
-              match = {
-                severity = "critical"
-              }
-              receiver = "criticals"
+            match = {
+              severity = "critical"
             }
+            receiver = "criticals"
+          }
           ]
         }
       }
@@ -380,17 +375,17 @@ locals {
       adminPassword = var.grafana_admin_password
       nodeSelector = var.configs["grafana"].node_selector
       additionalDataSources = [
-        {
-          name = "Loki"
-          type = "loki"
-          access = "proxy"
-          url = "http://loki-stack.loki-stack.svc.cluster.local:3100"
-          basicAuth = false
-          jsonData = {
-            tlsSkipVerify = true
-            maxLines = 1000
-          }
+      {
+        name = "Loki"
+        type = "loki"
+        access = "proxy"
+        url = "http://loki-stack.loki-stack.svc.cluster.local:3100"
+        basicAuth = false
+        jsonData = {
+          tlsSkipVerify = true
+          maxLines = 1000
         }
+      }
       ]
       "grafana.ini" = {
         server = {
@@ -467,13 +462,13 @@ locals {
             }
             bearer_token = var.monitoring_sa_api_key
             static_configs = [
-              {
-                targets = ["monitoring.api.cloud.yandex.net"]
-                labels = {
-                  folderId = var.folder_id
-                  service = var.postgres_id
-                }
+            {
+              targets = ["monitoring.api.cloud.yandex.net"]
+              labels = {
+                folderId = var.folder_id
+                service = var.postgres_id
               }
+            }
             ]
           },
           {
@@ -485,15 +480,15 @@ locals {
             }
             bearer_token = var.monitoring_sa_api_key
             static_configs = [
-              {
-                targets = ["monitoring.api.cloud.yandex.net"]
-                labels = {
-                  folderId = var.folder_id
-                  service = var.redis_id
-                }
+            {
+              targets = ["monitoring.api.cloud.yandex.net"]
+              labels = {
+                folderId = var.folder_id
+                service = var.redis_id
               }
+            }
             ]
-          }
+          },
         ]
       }
     }
@@ -683,10 +678,10 @@ resource "helm_release" "kube-prometheus-stack" {
   repository  = "https://prometheus-community.github.io/helm-charts"
   chart       = "kube-prometheus-stack"
   namespace   = kubernetes_namespace.prometheus.metadata[0].name
-  version     = "18.1.0"
+  version     = "35.5.1"
   values      = [yamlencode(local.values)]
   atomic      = true
-  #  depends_on  = [module.crds.req]
+#  depends_on  = [module.crds.req]
 }
 
 resource "helm_release" "prometheus-adapter" {

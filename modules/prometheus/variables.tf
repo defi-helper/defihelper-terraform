@@ -1,11 +1,11 @@
 variable "configs" {}
 
 variable "grafana_admin_password" {
-  type = string
+    type = string
 }
 
 variable "prometheus_auth" {
-  type = string
+    type = string
 }
 
 variable "alertmanager_email_from" {
