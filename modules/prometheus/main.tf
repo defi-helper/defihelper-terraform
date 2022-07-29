@@ -557,7 +557,7 @@ locals {
             matches = "^(.*)"
             as = "rabbitmq_backend_queue_messages_ready"
           }
-          metricsQuery = "abs(rabbitmq_queue_messages {queue=\"tasks_default\"} - rabbitmq_queue_consumers {queue=\"tasks_default\"})"
+          metricsQuery = "rabbitmq_queue_messages {queue=\"tasks_default\"}"
         },
         {
           seriesQuery = "{__name__=~\"^rabbitmq_queue_messages$\"}"
