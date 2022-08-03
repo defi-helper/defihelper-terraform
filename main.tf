@@ -318,6 +318,12 @@ module "postgres" {
   pg_bctrader_user_name        = var.pg_bctrader_user_name
   pg_bctrader_user_password    = var.pg_bctrader_user_password
   pg_bctrader_user_conn_limit  = var.pg_bctrader_user_conn_limit
+  pg_dev01_user_name        = var.pg_dev01_user_name
+  pg_dev01_user_password    = var.pg_dev01_user_password
+  pg_dev01_user_conn_limit  = var.pg_dev01_user_conn_limit
+  pg_dev02_user_name        = var.pg_dev02_user_name
+  pg_dev02_user_password    = var.pg_dev02_user_password
+  pg_dev02_user_conn_limit  = var.pg_dev02_user_conn_limit
   pg_adapters_user_name        = var.pg_adapters_user_name
   pg_adapters_user_password    = var.pg_adapters_user_password
   pg_adapters_user_conn_limit  = var.pg_adapters_user_conn_limit

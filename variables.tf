@@ -269,6 +269,30 @@ variable "pg_adapters_user_conn_limit" {
   description = ""
   default     = ""
 }
+variable "pg_dev01_user_name" {
+  description = ""
+  default     = ""
+}
+variable "pg_dev01_user_password" {
+  description = ""
+  default     = ""
+}
+variable "pg_dev01_user_conn_limit" {
+  description = ""
+  default     = ""
+}
+variable "pg_dev02_user_name" {
+  description = ""
+  default     = ""
+}
+variable "pg_dev02_user_password" {
+  description = ""
+  default     = ""
+}
+variable "pg_dev02_user_conn_limit" {
+  description = ""
+  default     = ""
+}
 ###################################### Managed Database End ######################################
 /*
 ###################################### Gitlab ######################################
