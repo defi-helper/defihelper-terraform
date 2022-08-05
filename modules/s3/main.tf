@@ -35,7 +35,6 @@ resource "yandex_storage_bucket" "open_bucket" {
   secret_key = yandex_iam_service_account_static_access_key.sa-static-key.secret_key
 
   bucket = var.open_bucket_name
-  default_storage_class = "COLD"
 
   grant {
     id          = yandex_iam_service_account.sa_s3.id
@@ -49,7 +48,6 @@ resource "yandex_storage_bucket" "open_public_bucket" {
   secret_key = yandex_iam_service_account_static_access_key.sa-static-key.secret_key
 
   bucket = "${var.open_bucket_name}-public"
-  default_storage_class = "COLD"
 
   grant {
     id          = yandex_iam_service_account.sa_s3.id
