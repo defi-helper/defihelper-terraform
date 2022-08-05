@@ -380,6 +380,7 @@ module "s3" {
   source           = "./modules/s3"
   folder_id = var.yandex_folder_id
   loki_bucket_name = var.loki_bucket_name
+  open_bucket_name = var.open_bucket_name
   s3_service_account = var.s3_service_account
   s3_service_account_loki = var.s3_service_account_loki
 }
