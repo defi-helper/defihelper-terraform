@@ -57,7 +57,7 @@ resource "yandex_storage_bucket" "open_public_bucket" {
 
   grant {
     type        = "Group"
-    permissions = ["READ"]
+    permissions = ["READ", "WRITE"]
     uri         = "http://acs.amazonaws.com/groups/global/AllUsers"
   }
 }
