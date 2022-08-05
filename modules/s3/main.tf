@@ -35,11 +35,32 @@ resource "yandex_storage_bucket" "open_bucket" {
   secret_key = yandex_iam_service_account_static_access_key.sa-static-key.secret_key
 
   bucket = var.open_bucket_name
+  default_storage_class = "COLD"
 
   grant {
     id          = yandex_iam_service_account.sa_s3.id
     type        = "CanonicalUser"
     permissions = ["FULL_CONTROL"]
+  }
+}
+
+resource "yandex_storage_bucket" "open_public_bucket" {
+  access_key = yandex_iam_service_account_static_access_key.sa-static-key.access_key
+  secret_key = yandex_iam_service_account_static_access_key.sa-static-key.secret_key
+
+  bucket = "${var.open_bucket_name}-public"
+  default_storage_class = "COLD"
+
+  grant {
+    id          = yandex_iam_service_account.sa_s3.id
+    type        = "CanonicalUser"
+    permissions = ["FULL_CONTROL"]
+  }
+
+  grant {
+    type        = "Group"
+    permissions = ["READ", "WRITE"]
+    uri         = "http://acs.amazonaws.com/groups/global/AllUsers"
   }
 }
 
