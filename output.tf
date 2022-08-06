@@ -35,11 +35,3 @@ output "s3_loki_static_secret_key" {
   value = module.s3.s3_loki_static_secret_key
   sensitive = true
 }
-
-output "s3_static_access_key" {
-  value = module.s3.s3_static_access_key
-}
-
-output "s3_static_secret_key" {
-  value = nonsensitive(module.s3.s3_static_secret_key)
-}
