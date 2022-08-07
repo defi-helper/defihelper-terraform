@@ -4,12 +4,12 @@ runners:
     config: |
       [[runners]]
         [runners.kubernetes]
-          cpu_limit = "2"
-          cpu_request = "200m"
-          cpu_request_overwrite_max_allowed = "2000m"
-          cpu_limit_overwrite_max_allowed = "2000m"
-          memory_limit = "2048M"
-          memory_request = "2048M"
+          cpu_limit = "4"
+          cpu_request = "100m"
+          cpu_request_overwrite_max_allowed = "4000m"
+          cpu_limit_overwrite_max_allowed = "4000m"
+          memory_limit = "512M"
+          memory_request = "1024M"
           memory_request_overwrite_max_allowed = "7168M"
           memory_limit_overwrite_max_allowed = "7168M"
     nodeSelector:
