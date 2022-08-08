@@ -578,7 +578,7 @@ locals {
             matches = "^(.*)"
             as = "rabbitmq_backend_history_messages_ready"
           }
-          metricsQuery = "rabbitmq_queue_messages {queue=\"tasks_metricHistory\"} - rabbitmq_queue_consumers {queue=\"tasks_metricHistory\"} + 20"
+          metricsQuery = "rabbitmq_queue_messages_ready {queue=\"tasks_metricHistory\"}"
         },
         {
           seriesQuery = "{__name__=~\"^rabbitmq_queue_messages$\"}"
@@ -599,7 +599,7 @@ locals {
             matches = "^(.*)"
             as = "rabbitmq_backend_metrics_messages_ready"
           }
-          metricsQuery = "rabbitmq_queue_messages {queue=\"tasks_metricCurrent\"} - rabbitmq_queue_consumers {queue=\"tasks_metricCurrent\"} + 20"
+          metricsQuery = "rabbitmq_queue_messages_ready {queue=\"tasks_metricCurrent\"}"
         },
         {
           seriesQuery = "{__name__=~\"^rabbitmq_queue_messages$\"}"
@@ -620,7 +620,7 @@ locals {
             matches = "^(.*)"
             as = "rabbitmq_backend_trigger_messages_ready"
           }
-          metricsQuery = "rabbitmq_queue_messages {queue=\"tasks_trigger\"} - rabbitmq_queue_consumers {queue=\"tasks_trigger\"} + 20"
+          metricsQuery = "rabbitmq_queue_messages_ready {queue=\"tasks_trigger\"}"
         },
         {
           seriesQuery = "{__name__=~\"^rabbitmq_queue_messages$\"}"
