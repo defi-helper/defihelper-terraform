@@ -139,6 +139,21 @@ locals {
             }
           }]
         },
+          {
+            name = "PostgresSeekerConnLimitReached"
+            rules = [{
+              alert = "PostgresSeekerConnLimit"
+              expr = "(pooler_ppen_tcp_connections + ${var.pg_seeker_user_conn_limit}/100*10  >= ${var.pg_seeker_user_conn_limit})"
+              for = "0m"
+              labels = {
+                severity = "critical"
+              }
+              annotations = {
+                summary = "Postgres Seeker connections limit reached"
+                description = "Postgres Open connections limit reached"
+              }
+            }]
+          },
         {
           name = "PostgresBctraderConnLimitReached"
           rules = [{
