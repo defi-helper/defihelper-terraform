@@ -551,7 +551,7 @@ locals {
             matches = "^(.*)"
             as = "rabbitmq_watcher_queue_messages_ready"
           }
-          metricsQuery = "rabbitmq_queue_messages {queue=\"scanner_tasks_default\"} - rabbitmq_queue_consumers {queue=\"scanner_tasks_default\"} + 10"
+          metricsQuery = "rabbitmq_queue_messages_ready {queue=\"scanner_tasks_default\"}"
         },
         {
           seriesQuery = "{__name__=~\"^rabbitmq_queue_messages$\"}"
@@ -656,7 +656,49 @@ locals {
             matches = "^(.*)"
             as = "rabbitmq_backend_bctrader_messages_ready"
           }
-          metricsQuery = "rabbitmq_queue_messages {queue=\"bctrader:queue\"} - rabbitmq_queue_consumers {queue=\"bctrader:queue\"} + 20"
+          metricsQuery = "rabbitmq_queue_messages_ready {queue=\"bctrader:queue\"}"
+        },
+        {
+          seriesQuery = "{__name__=~\"^rabbitmq_queue_messages$\"}"
+          resources = {
+            overrides = {
+              namespace = {
+                resource = "namespace"
+              }
+              pod = {
+                resource = "pod"
+              }
+              service = {
+                resource = "service"
+              }
+            }
+          }
+          name = {
+            matches = "^(.*)"
+            as = "rabbitmq_backend_open_messages_ready"
+          }
+          metricsQuery = "rabbitmq_queue_messages_ready {queue=\"open\"}"
+        },
+        {
+          seriesQuery = "{__name__=~\"^rabbitmq_queue_messages$\"}"
+          resources = {
+            overrides = {
+              namespace = {
+                resource = "namespace"
+              }
+              pod = {
+                resource = "pod"
+              }
+              service = {
+                resource = "service"
+              }
+            }
+          }
+          name = {
+            matches = "^(.*)"
+            as = "rabbitmq_backend_open_heavy_messages_ready"
+          }
+          metricsQuery = "rabbitmq_queue_messages_ready {queue=\"open_heavy\"}"
         },
       ]
     }
