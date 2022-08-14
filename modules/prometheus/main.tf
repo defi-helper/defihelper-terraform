@@ -675,7 +675,7 @@ locals {
           }
           name = {
             matches = "^(.*)"
-            as = "rabbitmq_backend_open_messages_ready"
+            as = "rabbitmq_open_backend_queue_messages_ready"
           }
           metricsQuery = "rabbitmq_queue_messages_ready {queue=\"open\"}"
         },
@@ -696,7 +696,7 @@ locals {
           }
           name = {
             matches = "^(.*)"
-            as = "rabbitmq_backend_open_heavy_messages_ready"
+            as = "rabbitmq_open_backend_heavy_messages_ready"
           }
           metricsQuery = "rabbitmq_queue_messages_ready {queue=\"open_heavy\"}"
         },
