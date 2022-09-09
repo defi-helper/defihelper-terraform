@@ -10,8 +10,8 @@ runners:
           cpu_limit_overwrite_max_allowed = "4000m"
           memory_limit = "512M"
           memory_request = "1024M"
-          memory_request_overwrite_max_allowed = "7168M"
-          memory_limit_overwrite_max_allowed = "7168M"
+          memory_request_overwrite_max_allowed = "11264M"
+          memory_limit_overwrite_max_allowed = "11264M"
     nodeSelector:
       group_name: "service"
 
