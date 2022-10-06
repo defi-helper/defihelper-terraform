@@ -150,6 +150,20 @@ resource "yandex_mdb_postgresql_cluster" "postgresql_cluster" {
     lc_type    = "ru_RU.UTF-8"
   }
 
+  user {
+    name       = var.pg_ranking_user_name
+    password   = var.pg_ranking_user_password
+    conn_limit = var.pg_ranking_user_conn_limit
+  }
+
+  database {
+    name       = "ranking"
+    owner      = var.pg_ranking_user_name
+    lc_collate = "ru_RU.UTF-8"
+    lc_type    = "ru_RU.UTF-8"
+  }
+
+
   dynamic "host" {
     for_each = var.enable_replication ? [for conf in var.location_subnets : {
       zone      = conf.zone

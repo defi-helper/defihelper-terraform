@@ -150,7 +150,22 @@ locals {
               }
               annotations = {
                 summary = "Postgres Seeker connections limit reached"
-                description = "Postgres Open connections limit reached"
+                description = "Postgres Seeker connections limit reached"
+              }
+            }]
+          },
+          {
+            name = "PostgresRankingConnLimitReached"
+            rules = [{
+              alert = "PostgresRankingConnLimit"
+              expr = "(pooler_ppen_tcp_connections + ${var.pg_ranking_user_conn_limit}/100*10  >= ${var.pg_ranking_user_conn_limit})"
+              for = "0m"
+              labels = {
+                severity = "critical"
+              }
+              annotations = {
+                summary = "Postgres Ranking connections limit reached"
+                description = "Postgres Ranking connections limit reached"
               }
             }]
           },

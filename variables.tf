@@ -245,6 +245,18 @@ variable "pg_seeker_user_conn_limit" {
   description = ""
   default     = ""
 }
+variable "pg_ranking_user_name" {
+  description = ""
+  default     = ""
+}
+variable "pg_ranking_user_password" {
+  description = ""
+  default     = ""
+}
+variable "pg_ranking_user_conn_limit" {
+  description = ""
+  default     = ""
+}
 variable "pg_bctrader_user_name" {
   description = ""
   default     = ""
