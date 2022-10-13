@@ -20,11 +20,11 @@ locals{
         resources = {
             requests = {
                 cpu     = "200m"
-        memory  = "256Mi"
+                memory  = "512Mi"
             }
             limits = {
                 cpu     = "500m"
-        memory  = "512Mi"
+                memory  = "1024Mi"
             }
         }
         replicaCount        = var.rabbitmq_replicaCount
