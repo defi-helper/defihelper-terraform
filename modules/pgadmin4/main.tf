@@ -48,7 +48,7 @@ resource "helm_release" "pgadmin4" {
   create_namespace = "true"
   repository = "https://helm.runix.net/"
   chart      = "pgadmin4"
-  version    = "1.12.2"
+  version    = "1.13.8"
   timeout    = 1800
   #values     = [file("modules/pgadmin4/values.yaml")]
   values     = [yamlencode(local.pgadmin4)]
