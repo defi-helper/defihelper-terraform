@@ -160,6 +160,49 @@ variable "bastion_ssh_users_file_path" {
 
 ###################################### Bastion End ######################################
 
+###################################### hosting ######################################
+variable "enable_hosting" {
+  description = ""
+  default     = ""
+}
+
+variable "hosting_vm_image" {
+  description = ""
+  default     = ""
+}
+
+variable "hosting_core_fractions" {
+  description = ""
+  default     = ""
+}
+
+variable "hosting_disk_size" {
+  description = ""
+  default     = ""
+}
+
+variable "hosting_cores" {
+  description = ""
+  default     = ""
+}
+
+variable "hosting_memory" {
+  description = ""
+  default     = ""
+}
+
+variable "hosting_nat_ip_address" {
+  description = ""
+  default     = ""
+}
+
+variable "hosting_ssh_users_file_path" {
+  description = ""
+  default     = ""
+}
+
+###################################### Hosting End ######################################
+
 ###################################### Managed Database ######################################
 variable "pg_version" {
   description = ""

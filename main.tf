@@ -294,6 +294,23 @@ module "bastion" {
   bastion_vm_image                  = "fd80mrhj8fl2oe87o4e1"
 }
 
+module "hosting" {
+  source = "./modules/hosting"
+
+  subnet_id  = module.vpc.location_subnets[0].id
+  name       = var.cluster_name
+  zone       = module.vpc.location_subnets[0].zone
+
+  hosting_nat_ip_address            = var.hosting_nat_ip_address
+  hosting_core_fractions            = var.hosting_core_fractions
+  hosting_cores                     = var.hosting_cores
+  hosting_memory                    = var.hosting_memory
+  hosting_disk_size                 = var.hosting_disk_size
+  hosting_ssh_users_file_path       = var.hosting_ssh_users_file_path
+  hosting_vm_image                  = "fd87tirk5i8vitv9uuo1"
+  enable_hosting                    = var.enable_hosting
+}
+
 module "postgres" {
   source                 = "./modules/postgres"
   name                   = "${var.cluster_name}-postgres"
