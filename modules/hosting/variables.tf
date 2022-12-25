@@ -18,6 +18,11 @@ variable "hosting_core_fractions" {
     default = ""
 }
 
+variable "hosting_disk_size" {
+  description = ""
+  default = ""
+}
+
 variable "hosting_cores" {
     description = ""
     default = ""
