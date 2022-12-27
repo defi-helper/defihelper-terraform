@@ -10,6 +10,7 @@ locals {
       nodeSelector = var.node_selector
       metrics = {
         enabled=true
+        ingressClass="nginx-ingress"
         service = {
           annotations = {
             "prometheus.io/scrape" = "true"
