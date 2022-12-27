@@ -750,7 +750,7 @@ resource "helm_release" "kube-prometheus-stack" {
   repository  = "https://prometheus-community.github.io/helm-charts"
   chart       = "kube-prometheus-stack"
   namespace   = kubernetes_namespace.prometheus.metadata[0].name
-  version     = "43.2.0"
+  version     = "43.1.4"
   values      = [yamlencode(local.values)]
   atomic      = true
 #  depends_on  = [module.crds.req]
