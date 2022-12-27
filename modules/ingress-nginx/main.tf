@@ -8,9 +8,9 @@ locals {
   values = {
     controller = {
       nodeSelector = var.node_selector
+      ingressClass="nginx-ingress"
       metrics = {
         enabled=true
-        ingressClass="nginx-ingress"
         service = {
           annotations = {
             "prometheus.io/scrape" = "true"
