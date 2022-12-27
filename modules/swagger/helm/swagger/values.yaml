@@ -3,7 +3,7 @@ labels:
 replicas: 1
 image:
   name: swaggerapi/swagger-ui
-  tag: v3.44.0
+  tag: v4.15.5
 ingress:
   annotations:
     kubernetes.io/ingress.class: "nginx"
