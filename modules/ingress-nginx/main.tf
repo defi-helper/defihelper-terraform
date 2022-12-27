@@ -102,9 +102,9 @@ locals {
         }
       }
     }
-#    tcp = {
-#      22 = "gitlab/gitlab-gitlab-shell:22"
-#    }
+    tcp = {
+      22 = "gitlab/gitlab-gitlab-shell:22"
+    }
   }
 }
 
@@ -119,18 +119,6 @@ resource "helm_release" "nginx-ingress" {
     kubernetes_namespace.ingress-nginx-ns,
   ]
 }
-
-
-#resource "helm_release" "nginx-ingress" {
-#  name              = "ingress-nginx"
-#  repository        = "https://kubernetes.github.io/ingress-nginx"
-#  chart             = "ingress-nginx"
-#  namespace         = "ingress-nginx"
-#  create_namespace  = true
-#  version           = "4.4.0"
-#  values            = [yamlencode(local.values)]
-#  depends_on        = [var.dep]
-#}
 
 resource "kubernetes_ingress_class" "nginx-ingress-class" {
   metadata {
