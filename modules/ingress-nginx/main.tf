@@ -127,6 +127,6 @@ resource "helm_release" "nginx-ingress" {
   namespace         = "ingress-nginx"
   create_namespace  = true
   version           = "4.4.0"
-#  values            = [yamlencode(local.values)]
+  values            = [yamlencode(local.values)]
   depends_on        = [var.dep]
 }
