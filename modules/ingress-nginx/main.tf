@@ -131,3 +131,13 @@ resource "helm_release" "nginx-ingress" {
   values            = [yamlencode(local.values)]
   depends_on        = [var.dep]
 }
+
+resource "kubernetes_ingress_class" "nginx-ingress-class" {
+  metadata {
+    name = "nginx-ingress"
+  }
+
+  spec {
+    controller = "k8s.io/ingress-nginx"
+  }
+}
