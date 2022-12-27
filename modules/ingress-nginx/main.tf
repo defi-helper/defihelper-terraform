@@ -1,8 +1,8 @@
-resource "kubernetes_namespace" "ingress-nginx-ns" {
-  metadata {
-    name = "ingress-nginx"
-  }
-}
+#resource "kubernetes_namespace" "ingress-nginx-ns" {
+#  metadata {
+#    name = "ingress-nginx"
+#  }
+#}
 
 locals {
   values = {
@@ -126,7 +126,7 @@ resource "helm_release" "nginx-ingress" {
   chart             = "ingress-nginx"
   namespace         = "ingress-nginx"
   create_namespace  = true
-  version           = "1.5.1"
+  version           = "4.4.0"
 #  values            = [yamlencode(local.values)]
   depends_on        = [var.dep]
 }
