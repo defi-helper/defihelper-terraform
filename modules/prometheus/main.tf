@@ -760,7 +760,7 @@ resource "helm_release" "prometheus-adapter" {
   name        = "prometheus-adapter"
   repository  = "https://prometheus-community.github.io/helm-charts"
   chart       = "prometheus-adapter"
-  version     = "3.3.1"
+  version     = "3.5.0"
   namespace   = kubernetes_namespace.prometheus.metadata[0].name
   values      = [yamlencode(local.prometheusAdapter)]
   atomic      = true
