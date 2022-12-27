@@ -434,6 +434,7 @@ locals {
     prometheus = {
       ingress = local.ingress["prometheus"]
       prometheusSpec = {
+        hostNetwork = true
         nodeSelector = var.configs["prometheus"].node_selector
         serviceMonitorSelectorNilUsesHelmValues = false
         serviceMonitorSelector = {}
