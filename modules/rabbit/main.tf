@@ -88,7 +88,7 @@ resource "helm_release" "rabbitmq" {
   chart             = "rabbitmq"
   namespace         = "services"
   create_namespace  = true
-  version           = "10.1.1"
+  version           = "11.2.1"
   timeout = 900
   values            = [yamlencode(local.rabbit)]
   depends_on        = [var.dep]

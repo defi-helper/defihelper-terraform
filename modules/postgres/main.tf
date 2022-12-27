@@ -6,6 +6,12 @@ resource "yandex_mdb_postgresql_cluster" "postgresql_cluster" {
 
   config {
     version = var.pg_version
+
+    pooler_config {
+      pool_discard = false
+      pooling_mode = "TRANSACTION"
+    }
+
     resources {
       resource_preset_id = var.pg_tier_id
       disk_type_id       = var.enable_replication ? "local-ssd" : "network-ssd"
