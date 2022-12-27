@@ -170,36 +170,6 @@ locals {
             }]
           },
         {
-          name = "PostgresBctraderConnLimitReached"
-          rules = [{
-            alert = "PostgresBctraderConnLimit"
-            expr = "(pooler_ppen_tcp_connections + ${var.pg_bctrader_user_conn_limit}/100*10  >= ${var.pg_bctrader_user_conn_limit})"
-            for = "0m"
-            labels = {
-              severity = "critical"
-            }
-            annotations = {
-              summary = "Postgres Bctrader connections limit reached"
-              description = "Postgres Bctrader connections limit reached"
-            }
-          }]
-        },
-        {
-          name = "PostgresBaConnLimitReached"
-          rules = [{
-            alert = "PostgresBaConnLimit"
-            expr = "(pooler_ppen_tcp_connections + ${var.pg_ba_user_conn_limit}/100*10  >= ${var.pg_ba_user_conn_limit})"
-            for = "0m"
-            labels = {
-              severity = "critical"
-            }
-            annotations = {
-              summary = "Postgres Ba connections limit reached"
-              description = "Postgres Ba connections limit reached"
-            }
-          }]
-        },
-        {
           name = "RabbitmqTooManyMessagesInQueue"
           rules = [{
             alert = "RabbitmqTooManyMessagesInQueue"
@@ -750,7 +720,7 @@ resource "helm_release" "kube-prometheus-stack" {
   repository  = "https://prometheus-community.github.io/helm-charts"
   chart       = "kube-prometheus-stack"
   namespace   = kubernetes_namespace.prometheus.metadata[0].name
-  version     = "41.9.1"
+  version     = "40.5.0"
   values      = [yamlencode(local.values)]
   atomic      = true
 #  depends_on  = [module.crds.req]
