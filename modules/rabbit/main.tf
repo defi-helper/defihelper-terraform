@@ -110,7 +110,7 @@ resource "helm_release" "prometheus-rabbitmq-exporter" {
   namespace  = "prometheus"
   repository = "https://prometheus-community.github.io/helm-charts"
   chart      = "prometheus-rabbitmq-exporter"
-  version    = "1.2.0"
+  version    = "1.3.0"
   values     = [yamlencode(local.exporter)]
   depends_on = [helm_release.rabbitmq]
 }
