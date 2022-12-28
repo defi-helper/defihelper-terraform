@@ -17,7 +17,7 @@ locals {
             {
               http01 = {
                 ingress = {
-                  class = "nginx"
+                  class = "nginx-ingress"
                 }
               }
             }
@@ -42,7 +42,7 @@ locals {
             {
               http01 = {
                 ingress = {
-                  class = "nginx"
+                  class = "nginx-ingress"
                 }
               }
             }
