@@ -4,11 +4,12 @@ locals{
           storageClass = "yc-network-ssd"
         }
         ingress = {
-            enabled     = true
-            hostname    = "${var.rabbitmq_host}.${var.cluster_domain}"
-            certManager = true
-            tls         = true
-            tlsSecret   = "rabbitmq-tls"
+            enabled          = true
+            hostname         = "${var.rabbitmq_host}.${var.cluster_domain}"
+            ingressClassName = "nginx-ingress"
+            certManager      = true
+            tls              = true
+            tlsSecret        = "rabbitmq-tls"
         }
         volumePermissions = {
             enabled = true

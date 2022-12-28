@@ -55,13 +55,19 @@ resource "helm_release" "pgadmin4" {
   depends_on = [var.dep]
 
 
-  # set {
-  #   name  = "nodeSelector"
-  #   value = "service"
-  # }
+  set {
+    name  = "nodeSelector"
+    value = "service"
+  }
+
   set {
     name  = "ingress.enabled"
     value = "true"
+  }
+
+  set {
+    name  = "ingress.ingressClassName"
+    value = "nginx-ingress"
   }
 
   set {
