@@ -8,7 +8,7 @@ locals {
     ingress = {
       enabled = true
       annotations = {
-        "kubernetes.io/ingress.class"                  = "nginx"
+        "kubernetes.io/ingress.class"                  = "nginx-ingress"
         "kubernetes.io/tls-acme"                       = "true"
         "cert-manager.io/cluster-issuer"               = var.ingress.issuer
         "ingress.kubernetes.io/ssl-redirect"           = "true"

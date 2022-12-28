@@ -11,7 +11,7 @@ locals {
           }
         ]
         annotations = merge({
-          "kubernetes.io/ingress.class" = "nginx"
+          "kubernetes.io/ingress.class" = "nginx-ingress"
           "cert-manager.io/cluster-issuer" = config["ingress"]["issuer"]
           "nginx.ingress.kubernetes.io/use-regex" = "true"
         }, jsondecode(lookup(config, "http_auth", true) != false ? jsonencode({
