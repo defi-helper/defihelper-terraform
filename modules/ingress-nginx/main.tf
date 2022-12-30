@@ -109,17 +109,17 @@ locals {
   }
 }
 
-resource "helm_release" "nginx-ingress" {
-  name       = "nginx-ingress-controller"
-  chart      = "${path.root}/modules/ingress-nginx/helm/ingress-nginx"
-  namespace  = "ingress-nginx"
-  create_namespace = true
-  values = [yamlencode(local.values)]
-  depends_on = [
-    var.dep,
-    kubernetes_namespace.ingress-nginx-ns,
-  ]
-}
+#resource "helm_release" "nginx-ingress" {
+#  name       = "nginx-ingress-controller"
+#  chart      = "${path.root}/modules/ingress-nginx/helm/ingress-nginx"
+#  namespace  = "ingress-nginx"
+#  create_namespace = true
+#  values = [yamlencode(local.values)]
+#  depends_on = [
+#    var.dep,
+#    kubernetes_namespace.ingress-nginx-ns,
+#  ]
+#}
 
 resource "kubernetes_ingress_class" "nginx-ingress-class" {
   metadata {
