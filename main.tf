@@ -175,13 +175,13 @@ module "cert-manager" {
 
 }
 
-module "kubernetes-dashboard" {
-  source = "./modules/kubernetes-dashboard"
-
-  node_selector = local.node_selectors["service"]
-
-  ingress = local.ingress["dashboard"]
-}
+#module "kubernetes-dashboard" {
+#  source = "./modules/kubernetes-dashboard"
+#
+#  node_selector = local.node_selectors["service"]
+#
+#  ingress = local.ingress["dashboard"]
+#}
 
 module "admins" {
   source = "./modules/admins"
