@@ -131,12 +131,12 @@ resource "kubernetes_ingress_class" "nginx-ingress-class" {
   }
 }
 
-resource "kubernetes_ingress_class" "nginx-class" {
-  metadata {
-    name = "nginx"
-  }
-
-  spec {
-    controller = "k8s.io/ingress-nginx"
-  }
-}
+#resource "kubernetes_ingress_class" "nginx-class" {
+#  metadata {
+#    name = "nginx"
+#  }
+#
+#  spec {
+#    controller = "k8s.io/ingress-nginx"
+#  }
+#}
