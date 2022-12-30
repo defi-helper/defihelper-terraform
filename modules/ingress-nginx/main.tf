@@ -66,7 +66,7 @@ locals {
       resources = {
         "limits" = {
           "cpu" = "1000m"
-          "memory" = var.nginx_ingress_memory_request
+          "memory" = "512Mi"
         }
         "requests" = {
           "cpu" = var.nginx_ingress_cpu_request
