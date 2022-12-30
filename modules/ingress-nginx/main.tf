@@ -103,9 +103,9 @@ locals {
         }
       }
     }
-    tcp = {
-      22 = "gitlab/gitlab-gitlab-shell:22"
-    }
+#    tcp = {
+#      22 = "gitlab/gitlab-gitlab-shell:22"
+#    }
   }
 }
 
