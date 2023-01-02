@@ -4,12 +4,11 @@ locals{
           storageClass = "yc-network-ssd"
         }
         ingress = {
-            enabled          = true
-            hostname         = "${var.rabbitmq_host}.${var.cluster_domain}"
-            ingressClassName = "nginx-ingress"
-            certManager      = true
-            tls              = true
-            tlsSecret        = "rabbitmq-tls"
+            enabled     = true
+            hostname    = "${var.rabbitmq_host}.${var.cluster_domain}"
+            certManager = true
+            tls         = true
+            tlsSecret   = "rabbitmq-tls"
         }
         volumePermissions = {
             enabled = true
@@ -89,7 +88,7 @@ resource "helm_release" "rabbitmq" {
   chart             = "rabbitmq"
   namespace         = "services"
   create_namespace  = true
-  version           = "11.2.1"
+  version           = "10.1.1"
   timeout = 900
   values            = [yamlencode(local.rabbit)]
   depends_on        = [var.dep]
@@ -111,7 +110,7 @@ resource "helm_release" "prometheus-rabbitmq-exporter" {
   namespace  = "prometheus"
   repository = "https://prometheus-community.github.io/helm-charts"
   chart      = "prometheus-rabbitmq-exporter"
-  version    = "1.3.0"
+  version    = "1.2.0"
   values     = [yamlencode(local.exporter)]
   depends_on = [helm_release.rabbitmq]
 }
