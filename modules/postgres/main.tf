@@ -9,7 +9,7 @@ resource "yandex_mdb_postgresql_cluster" "postgresql_cluster" {
 
     pooler_config {
       pool_discard = false
-      pooling_mode = "TRANSACTION"
+      pooling_mode = "SESSION"
     }
 
     resources {
