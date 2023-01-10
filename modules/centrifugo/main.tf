@@ -48,38 +48,48 @@ locals {
           presence = true
           publish = true
           history_size = 50
-          history_lifetime = 300
+          history_lifetime = "300s"
           history_recover = true
+          allow_subscribe_for_client = true
+          allow_history_for_subscriber = true
         },
         {
           name = "chat"
           presence = true
           publish = true
           history_size = 50
-          history_lifetime = 60
+          history_lifetime = "10800s"
           history_recover = true
+          allow_subscribe_for_client = true
+          allow_history_for_subscriber = true
         },
         {
           name = "at_chat"
           presence = true
           publish = true
           history_size = 50
-          history_lifetime = 60
+          history_lifetime = "60s"
           history_recover = true
+          allow_subscribe_for_client = true
+          allow_history_for_subscriber = true
         },
         {
           name = "at_notification"
           presence = true
           publish = true
           history_size = 10
-          history_lifetime = 60
+          history_lifetime = "60s"
           history_recover = true
+          allow_subscribe_for_client = true
+          allow_history_for_subscriber = true
         },
         {
           name = "ok_notification"
           presence = true
           history_size = 10
-          history_lifetime = 60
+          history_lifetime = "60s"
+          allow_subscribe_for_client = true
+          allow_history_for_subscriber = true
         }
       ]
     }
