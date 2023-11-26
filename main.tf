@@ -291,7 +291,7 @@ module "bastion" {
   bastion_memory                    = var.bastion_memory
   bastion_allow_stopping_for_update = var.bastion_allow_stopping_for_update
   bastion_ssh_users_file_path       = var.bastion_ssh_users_file_path
-  bastion_vm_image                  = "fd80mrhj8fl2oe87o4e1"
+  bastion_vm_image                  = "fd8un8f40qgmlenpa0qb"
 }
 
 module "hosting" {
