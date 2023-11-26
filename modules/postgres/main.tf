@@ -210,7 +210,7 @@ resource "yandex_mdb_postgresql_cluster" "postgresql_open" {
   network_id  = var.vpc_id
 
   config {
-    version = "16" // fix to var
+    version = var.pg_version
 
     pooler_config {
       pool_discard = false
