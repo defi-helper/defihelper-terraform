@@ -219,8 +219,8 @@ resource "yandex_mdb_postgresql_cluster" "postgresql_open" {
 
     resources {
       resource_preset_id = "s2.micro" // fix to var
-      disk_type_id       = "network-ssd"
-      disk_size          = "49G"
+      disk_type_id       = "network-ssd" // fix to var
+      disk_size          = "49G" // fix to var
     }
   }
 
