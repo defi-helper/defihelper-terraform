@@ -210,7 +210,7 @@ resource "yandex_mdb_postgresql_cluster" "postgresql_open" {
   network_id  = var.vpc_id
 
   config {
-    version = var.pg_version
+    version = "16" // fix to var
 
     pooler_config {
       pool_discard = false
@@ -218,7 +218,7 @@ resource "yandex_mdb_postgresql_cluster" "postgresql_open" {
     }
 
     resources {
-      resource_preset_id = "s2.micro"
+      resource_preset_id = "s2.micro" // fix to var
       disk_type_id       = var.enable_replication ? "local-ssd" : "network-ssd"
       disk_size          = var.pg_instance_disk_size
     }
