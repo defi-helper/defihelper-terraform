@@ -225,10 +225,7 @@ resource "yandex_mdb_postgresql_cluster" "postgresql_open" {
   }
 
   dynamic "host" {
-    for_each = var.enable_replication ? [for conf in var.location_subnets : {
-      zone      = conf.zone
-      subnet_id = conf.id
-    }] : [{
+    for_each = [{
       zone      = var.location_subnets[0].zone
       subnet_id = var.location_subnets[0].id
     }]
