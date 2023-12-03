@@ -1,3 +1,3 @@
 output "postgres_id" {
-  value = yandex_mdb_postgresql_cluster.postgresql_cluster.id
+  value = yandex_mdb_postgresql_cluster.open.id
 }
